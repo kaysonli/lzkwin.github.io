@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="../js/Photoshop.js"></script>
+    <script type="text/javascript">
+        function imagesSelected(myFiles) {
+            var imageReader = new FileReader();
+            imageReader.onload = function(e) {
+                var dataUrl = e.target.result;
+                var display = document.getElementById('display');
+                display.src = dataUrl;
+            }
+            imageReader.readAsDataURL(myFiles[0]);
+        }
+        window.onload = function(){
+            var btnASCII = document.getElementById('btnASCII');
+            var display = document.getElementById('display');
+            btnASCII.addEventListener('click', function(){
+                if(!display.src){
+                    return;
+                }
+                var canvas = document.getElementById('canvas');
+                canvas.width = display.width;
+                canvas.height = display.height;
+                var ctx = canvas.getContext('2d');
+                ctx.drawImage(display, 0, 0, display.width, display.height);
+                var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                Photoshop.grayscale(imageData);
+                ctx.putImageData(imageData, 0, 0);
+                canvas.style.display = 'block';
+            })
+        }
+    </script>
+    </head>
+    <body>
+        <input type="file" id="input" onchange="imagesSelected(this.files)" />
+        <p>
+            <img id="display" style="width: 40%;" />
+        </p>
+        <div><input type="button" id="btnASCII" value="字符画" /></div>
+        <pre id="ascii"></pre>
+        <canvas id="canvas" style="display:none;"></canvas>
+    </body>
+</html>
