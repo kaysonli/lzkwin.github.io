@@ -29,6 +29,10 @@
                 Photoshop.grayscale(imageData);
                 ctx.putImageData(imageData, 0, 0);
                 canvas.style.display = 'block';
+                var start = + new Date;
+                Photoshop.ascii(imageData, imageData.width, imageData.height);
+                end = +new Date;
+                console.log('cost:', end-start);
             })
         }
     </script>

@@ -18,13 +18,14 @@
 
 	ps.ascii = function(imageData, width, height) {
 		var pixels = [];
-		for (var i = 0; i < imageData.length; i += 4) {
+		var data = imageData.data;
+		for (var i = 0, ln = data.length; i < ln; i += 4) {
 			pixels.push({
-				R: imageData[i],
-				G: imageData[i + 1],
-				B: imageData[i + 2],
-				A: imageData[i + 3],
-				gray: ~~(imageData[i] * 0.3 + imageData[i + 1] * 0.59 + imageData[i + 2] * 0.11)
+				R: data[i],
+				G: data[i + 1],
+				B: data[i + 2],
+				A: data[i + 3],
+				gray: ~~(data[i] * 0.3 + data[i + 1] * 0.59 + data[i + 2] * 0.11),
 				x: i % width,
 				y: ~~(i / width)
 			});
@@ -40,21 +41,30 @@
 		for (var i = 0; i < pixels.length; i++) {
 
 		}
-		for (var row = 0; row < div; row++) {
-			for (var col = 0; col < div; col++) {
-				var square = [], count={}, max = 0;
-				for (y = 0; y < h; y++) {
-					for (x = 0; x < w; x++) {
-						var value = pixels[x * width + y];
+		var square = [];
+		for (var row = 0; row < h; row++) {
+			for (var col = 0; col < w; col++) {
+				var count = {}, max = 0,
+					target;
+				for (y = 0; y < div; y++) {
+					for (x = 0; x < div; x++) {
+						var cx = col * w + x,
+							cy = row * h + y;
+						var pixel = pixels[cy * width + cx];
+						if(pixel == undefined){
+							continue;
+						}
+						var value = pixel.gray;
 						count[value] = count[value] || 1;
 						count[value]++;
-						if(count[value] > max){
+						if (count[value] > max) {
 							max = count[value];
+							square.push(value);
 						}
-						square.push(pixels[x * width + y]);
 					}
 				};
 			}
 		}
+		console.log(square);
 	}
 })(window);
