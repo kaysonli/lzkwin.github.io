@@ -8,8 +8,30 @@
 		btn.addEventListener('click', function() {
 			stepNav.stepForward();
 		});
+		listen();
+
 	}
 })();
+
+function listen() {
+	// Here "addEventListener" is for standards-compliant web browsers and "attachEvent" is for IE Browsers.
+	var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+	var eventer = window[eventMethod];
+
+	// Now...
+	// if 
+	//    "attachEvent", then we need to select "onmessage" as the event. 
+	// if 
+	//    "addEventListener", then we need to select "message" as the event
+
+	var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+	// Listen to message from child IFrame window
+	eventer(messageEvent, function(e) {
+		alert(e.data);
+		// Do whatever you want to do with the data got from IFrame in Parent form.
+	}, false);
+}
 
 function addClass(dom, className) {
 	var cls = dom.className;
