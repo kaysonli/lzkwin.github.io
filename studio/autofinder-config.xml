@@ -1,0 +1,22 @@
+﻿<?xml version="1.0"?>
+<config>
+	<startup>
+		<game-type type="0" marginTop="190" marginLeft="5" width="500" height="450" gutter="9" />
+		<game-type type="1" marginTop="186" marginLeft="10" width="382" height="286" gutter="11"  />
+		<payers>
+			<user></user>
+			<user></user>
+		</payers>
+	</startup>
+	<ads>
+		<interval>3000</interval>
+		<screen>
+			<item imgUrl="" clickUrl="" />
+			<item imgUrl="" clickUrl="" />
+		</screen>
+		<statusbar>
+			<item text="" clickUrl="" />
+			<item text="" clickUrl="" />
+		</statusbar>
+	</ads>
+</config>
