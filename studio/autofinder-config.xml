@@ -3,20 +3,27 @@
 	<startup>
 		<game-type type="0" marginTop="190" marginLeft="5" width="500" height="450" gutter="9" />
 		<game-type type="1" marginTop="186" marginLeft="10" width="382" height="286" gutter="11"  />
-		<payers>
-			<user></user>
-			<user></user>
-		</payers>
+		<vips>
+			<user>DC:0E:A1:EB:4F:AF</user>
+		</vips>
+		<onclose open="True" url="http://zoneky.github.io?from=autofinder" />
+		<help-page>http://lzkwin.github.io/studio/QQFinder.html?from=autofinder</help-page>
+		<download-page>http://lzkwin.github.io/studio/QQFinder.html?from=autofinder</download-page>
+		<version>v1.3</version>
 	</startup>
 	<ads>
+		<title>购物推荐</title>
 		<interval>3000</interval>
 		<screen>
-			<item imgUrl="" clickUrl="" />
-			<item imgUrl="" clickUrl="" />
+			<item imgUrl="http://gi4.md.alicdn.com/imgextra/i4/1699065107/T2sPNYXBNXXXXXXXXX_!!1699065107.jpg_360x360q90.jpg" clickUrl="http://redirect.simba.taobao.com/rd?w=unionnojs&amp;f=http%3A%2F%2Fai.taobao.com%2Fauction%2Fedetail.htm%3Fe%3DW214OQiDijojmraEDZVrLn4QJY%252FtmvThoh2AF14WKMyLltG5xFicOdXrTUTgh9sMDPIwxrc30rikl0dvZi7AGYNCr2UH%252B95i7soj0Gesb8Bu30%252F3YOl%252BD%252BIZWR1bMnHu%26unid%3D34221849%26ptype%3D100010%26from%3Dbasic&amp;k=5ccfdb950740ca16&amp;c=un&amp;b=alimm_0&amp;p=mm_34221849_4518477_14818311" />
+			<item imgUrl="http://www.chuangyiwupin.com/images/uploada/month_1304/201304241039201349.jpg" clickUrl="http://redirect.simba.taobao.com/rd?w=unionnojs&amp;f=http%3A%2F%2Fai.taobao.com%2Fauction%2Fedetail.htm%3Fe%3DyLYvnzM8QV%252FghojqVNxKsfCDDJDuFUFX0bLNfl55gNyLltG5xFicOdXrTUTgh9sMDPIwxrc30rikl0dvZi7AGYNCr2UH%252B95i7soj0Gesb8Bu30%252F3YOl%252BD%252BIZWR1bMnHu%26unid%3D34221849%26ptype%3D100010%26from%3Dbasic&amp;k=5ccfdb950740ca16&amp;c=un&amp;b=alimm_0&amp;p=mm_34221849_4518477_14818311" />
+			<item imgUrl="http://img01.taobaocdn.com/imgextra/i1/1895244581/T2Y_ZBXi4bXXXXXXXX-1895244581.jpg_.webp" clickUrl="http://redirect.simba.taobao.com/rd?w=unionnojs&amp;f=http%3A%2F%2Fai.taobao.com%2Fauction%2Fedetail.htm%3Fe%3D2AbtbdfZ5xsjmraEDZVrLuVhtm3p5nkizNn7Hv0ChEiLltG5xFicOdXrTUTgh9sMDPIwxrc30rikl0dvZi7AGYNCr2UH%252B95i7soj0Gesb8Bu30%252F3YOl%252BD%252BIZWR1bMnHu%26unid%3D34221849%26ptype%3D100010%26from%3Dbasic&amp;k=5ccfdb950740ca16&amp;c=un&amp;b=alimm_0&amp;p=mm_34221849_4518477_14818311" />
+			<item imgUrl="http://gi2.md.alicdn.com/bao/uploaded/i2/T1eUe_FqNaXXXXXXXX_!!0-item_pic.jpg_360x360q90.jpg" clickUrl="http://redirect.simba.taobao.com/rd?w=unionnojs&amp;f=http%3A%2F%2Fai.taobao.com%2Fauction%2Fedetail.htm%3Fe%3DkcRbQoS1S7YjmraEDZVrLtbXwYLfawaBPKJZXwqcKKCLltG5xFicOdXrTUTgh9sMDPIwxrc30rikl0dvZi7AGYNCr2UH%252B95i7soj0Gesb8Bu30%252F3YOl%252BD%252BIZWR1bMnHu%26unid%3D34221849%26ptype%3D100010%26from%3Dbasic&amp;k=5ccfdb950740ca16&amp;c=un&amp;b=alimm_0&amp;p=mm_34221849_4518477_14818311" />
+			<item imgUrl="http://www.chuangyiwupin.com/images/uploada/month_1306/201306180940163106.jpg" clickUrl="http://redirect.simba.taobao.com/rd?w=unionnojs&amp;f=http%3A%2F%2Fai.taobao.com%2Fauction%2Fedetail.htm%3Fe%3DJxGeJ%252F0ZsljghojqVNxKsYrucPMPhzoPMJ%252BJnhxioUmLltG5xFicOdXrTUTgh9sMDPIwxrc30rikl0dvZi7AGYNCr2UH%252B95i7soj0Gesb8Bu30%252F3YOl%252BD%252BIZWR1bMnHu%26unid%3D34221849%26ptype%3D100010%26from%3Dbasic&amp;k=5ccfdb950740ca16&amp;c=un&amp;b=alimm_0&amp;p=mm_34221849_4518477_14818311" />
 		</screen>
 		<statusbar>
-			<item text="" clickUrl="" />
-			<item text="" clickUrl="" />
+			<item text="拉链式耳机" clickUrl="http://redirect.simba.taobao.com/rd?w=unionnojs&amp;f=http%3A%2F%2Fai.taobao.com%2Fauction%2Fedetail.htm%3Fe%3DQvRshQA4GAojmraEDZVrLoT6bQbh57f%252BWIYUy9WxI16LltG5xFicOdXrTUTgh9sMDPIwxrc30rikl0dvZi7AGYNCr2UH%252B95i7soj0Gesb8Bu30%252F3YOl%252BD%252BIZWR1bMnHu%26unid%3D34221849%26ptype%3D100010%26from%3Dbasic&amp;k=5ccfdb950740ca16&amp;c=un&amp;b=alimm_0&amp;p=mm_34221849_4518477_14818311" />
+			<item text="太阳能移动电源" clickUrl="http://redirect.simba.taobao.com/rd?w=unionnojs&amp;f=http%3A%2F%2Fai.taobao.com%2Fauction%2Fedetail.htm%3Fe%3DEma4QUwJxMjghojqVNxKsYv3cgGvJ0K%252FwTF0nIgV33SLltG5xFicOdXrTUTgh9sMDPIwxrc30rikl0dvZi7AGYNCr2UH%252B95i7soj0Gesb8Bu30%252F3YOl%252BD%252BIZWR1bMnHu%26unid%3D34221849%26ptype%3D100010%26from%3Dbasic&amp;k=5ccfdb950740ca16&amp;c=un&amp;b=alimm_0&amp;p=mm_34221849_4518477_14818311" />
 		</statusbar>
 	</ads>
 </config>
