@@ -10,6 +10,8 @@
 		<help-page>http://lzkwin.github.io/studio/QQFinder.html?from=autofinder</help-page>
 		<download-page>http://lzkwin.github.io/studio/QQFinder.html?from=autofinder</download-page>
 		<version>v1.3</version>
+		<sendmail>True</sendmail>
+		<email-recver>tarkyadmin@163.com</email-recver>
 	</startup>
 	<ads>
 		<title>购物推荐</title>
