@@ -2,6 +2,16 @@
 <html>
     <head>
     <meta charset="utf-8">
+    <style type="text/css">
+        pre {
+            font-family: Courier New;
+            font-size: 10px;
+            line-height: 8px;
+        }
+        .clear {
+            clear: both;
+        }
+    </style>
     <script type="text/javascript" src="../js/Photoshop.js"></script>
     <script type="text/javascript">
         function imagesSelected(myFiles) {
@@ -28,9 +38,9 @@
                 var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
                 Photoshop.grayscale(imageData);
                 ctx.putImageData(imageData, 0, 0);
-                canvas.style.display = 'block';
+                // canvas.style.display = 'block';
                 var start = + new Date;
-                var ascii = Photoshop.ascii(imageData, imageData.width, imageData.height);
+                var ascii = Photoshop.ascii(ctx, canvas.width, canvas.height, 80);
                 document.getElementById('ascii').innerHTML = ascii;
                 end = +new Date;
                 console.log('cost:', end-start);
@@ -41,10 +51,11 @@
     <body>
         <input type="file" id="input" onchange="imagesSelected(this.files)" />
         <p>
-            <img id="display" style="" />
+            <img id="display" style="float: left;" />
+            <canvas id="canvas" style="display:none;"></canvas>
         </p>
-        <div><input type="button" id="btnASCII" value="字符画" /></div>
+        <div class="clear"><input type="button" id="btnASCII" value="字符画" /></div>
         <pre id="ascii"></pre>
-        <canvas id="canvas" style="display:none;"></canvas>
+        
     </body>
 </html>
