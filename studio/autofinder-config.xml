@@ -6,7 +6,7 @@
 		<vips>
 			<user>DC:0E:A1:EB:4F:AF</user>
 		</vips>
-		<onclose open="True" url="http://zoneky.github.io?from=autofinder" />
+		<onclose open="True" url="http://zoneky.github.io?from=autofinder_v1.3" />
 		<help-page>http://lzkwin.github.io/studio/QQFinder.html?from=autofinder_v1.3</help-page>
 		<download-page>http://lzkwin.github.io/studio/QQFinder.html?from=autofinder_v1.3</download-page>
 		<version>v1.3</version>
