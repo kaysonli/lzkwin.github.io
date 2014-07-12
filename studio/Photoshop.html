@@ -39,11 +39,12 @@
                 Photoshop.grayscale(imageData);
                 ctx.putImageData(imageData, 0, 0);
                 // canvas.style.display = 'block';
-                var start = + new Date;
-                var ascii = Photoshop.ascii(ctx, canvas.width, canvas.height, 80);
+                var start = +new Date;
+                var ascii = Photoshop.ascii(ctx, canvas.width, canvas.height, 120);
                 document.getElementById('ascii').innerHTML = ascii;
                 end = +new Date;
-                console.log('cost:', end-start);
+                console.log('cost:', end - start);
+                
             })
         }
     </script>
