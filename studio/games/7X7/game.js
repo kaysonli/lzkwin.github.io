@@ -2,6 +2,8 @@
     var css = ['open', 'dead'];
     var colors = ['red', 'purple', 'yellow', 'green', 'blue'];
 
+    var GraphNodeType = { OPEN: 0, WALL: 1 };
+
     function Game($graph, options, implementation) {
         this.$graph = $graph;
         this.search = implementation;
@@ -95,4 +97,6 @@
     Game.prototype.nodeFromElement = function($cell) {
         return this.graph.nodes[parseInt($cell.attr("x"))][parseInt($cell.attr("y"))];
     };
-});
+
+    window.Game = Game;
+})();
