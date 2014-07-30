@@ -10,15 +10,19 @@
         };
         return formatStr;
     }
-    var css = ['open', 'dead'];
+    var css = {
+        wall: 'wall',
+        open: 'open'
+    }
     var colors = ['red', 'purple', 'yellow', 'green', 'blue'];
 
     var GraphNodeType = { OPEN: 0, WALL: 1 };
 
     function Game($graph, options, implementation) {
         this.$graph = $graph;
+        this.$comingCells = $('#coming-cells');
         this.search = implementation;
-        this.comingCount = 3;
+        this.comingCount = 5;
         this.opts = $.extend({
             wallFrequency: .1,
             debug: true,
@@ -34,7 +38,7 @@
     };
     Game.prototype.initialize = function() {
         var self = this;
-        var grid = [];
+        var grid = this.grid = [];
         var $graph = this.$graph;
         $graph.empty();
 
@@ -54,76 +58,92 @@
                 var $cell = $cellTemplate.clone();
                 $cell.attr("id", id).attr("x", x).attr("y", y);
                 $row.append($cell);
-
-                var isWall = Math.floor(Math.random() * (1 / self.opts.wallFrequency));
-                if (isWall == 0) {
-                    row.push(GraphNodeType.WALL);
-                    $cell.addClass(css.wall);
-                } else {
-                    row.push(GraphNodeType.OPEN);
-                    if (!startSet) {
-                        $cell.addClass(css.start);
-                        startSet = true;
-                    }
-                }
+                row.push(GraphNodeType.OPEN);
             }
             grid.push(row);
         }
 
-        this.graph = new Graph(grid);
+        // this.graph = new Graph(grid);
 
         // bind cell event, set start/wall positions
         this.$cells = $graph.find(".grid_item");
         this.$cells.click(function() {
             self.cellClicked($(this))
         });
+
+        this.makeComingColors();
+        this.fillCells();
     };
+
+    Game.prototype.makeComingColors = function() {
+        this.comingCells = [];
+        for (var i = 0; i < this.comingCount; i++) {
+            var colorIndex = ~~ (Math.random() * colors.length);
+            this.comingCells.push(colors[colorIndex]);
+            var cell = $("[index=" + i + "]");
+            cell.css('background-color', colors[colorIndex]);
+        };
+    }
 
     Game.prototype.fillCells = function() {
         this.comingCells = this.comingCells || [];
+        this.filledMap = this.filledMap || {};
+        var grid = this.grid;
         var size = this.opts.gridSize;
-        for (var i = 0; i < this.comingCells.length; i++) {
-            var x = ~~ (Math.random() * size),
-                y = ~~ (Math.random() * size),
-                selector = format('span[x={0}][y={1}]', x, y);
-            var cell = $(selector, this.$graph),
-                isWall = cell.attr('wall');
-            while(isWall) {
-                x = ~~ (Math.random() * size);
-                y = ~~ (Math.random() * size);
-                cell = $(selector, this.$graph);
-                isWall = cell.attr('wall');
+        var openList = [];
+        for(var row = 0; row < size; row++) {
+            for(var col = 0; col < size; col++) {
+                if(grid[row][col] == GraphNodeType.OPEN) {
+                    openList.push({
+                        x: row,
+                        y: col,
+                        type: grid[row][col]
+                    });
+                }
             }
-            cell.css('color', this.comingCells[i]);
+        }
+        for (var i = 0; i < this.comingCells.length; i++) {
+            var openIndex = ~~ (Math.random() * openList.length);
+            var x = openList[openIndex].x,
+                y = openList[openIndex].y;
+            openList.splice(openIndex, 1);
+            grid[x][y] = GraphNodeType.WALL;
+            var selector = format('span[x={0}][y={1}]', x, y);
+            var cell = $(selector, this.$graph);
+            cell.css('background-color', this.comingCells[i]);
+            cell.attr('wall', 'wall');
         };
+        this.makeComingColors();
+        this.graph = new Graph(grid);
     }
 
     Game.prototype.cellClicked = function($end) {
 
         var end = this.nodeFromElement($end);
 
-        if ($end.hasClass(css.wall) || $end.hasClass(css.start)) {
-            log("clicked on wall or start...", $end);
-            return;
-        }
+        // if ($end.hasClass(css.wall) || $end.hasClass(css.start)) {
+        //     log("clicked on wall or start...", $end);
+        //     return;
+        // }
+        this.fillCells();
 
-        this.$cells.removeClass(css.finish);
-        $end.addClass("finish");
-        var $start = this.$cells.filter("." + css.start);
-        var start = this.nodeFromElement($start);
+        // this.$cells.removeClass(css.finish);
+        // $end.addClass("finish");
+        // var $start = this.$cells.filter("." + css.start);
+        // var start = this.nodeFromElement($start);
 
-        var sTime = new Date();
-        var path = this.search(this.graph.nodes, start, end);
-        var fTime = new Date();
+        // var sTime = new Date();
+        // var path = this.search(this.graph.nodes, start, end);
+        // var fTime = new Date();
 
-        if (!path || path.length == 0) {
-            $("#message").text("couldn't find a path (" + (fTime - sTime) + "ms)");
-            this.animateNoPath();
-        } else {
-            $("#message").text("search took " + (fTime - sTime) + "ms.");
-            this.drawDebugInfo(this.opts.debug);
-            this.animatePath(path);
-        }
+        // if (!path || path.length == 0) {
+        //     $("#message").text("couldn't find a path (" + (fTime - sTime) + "ms)");
+        //     this.animateNoPath();
+        // } else {
+        //     $("#message").text("search took " + (fTime - sTime) + "ms.");
+        //     this.drawDebugInfo(this.opts.debug);
+        //     this.animatePath(path);
+        // }
     };
     Game.prototype.nodeFromElement = function($cell) {
         return this.graph.nodes[parseInt($cell.attr("x"))][parseInt($cell.attr("y"))];
