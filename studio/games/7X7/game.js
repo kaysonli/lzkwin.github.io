@@ -1,4 +1,15 @@
 ;(function() {
+    function format() {
+        if(arguments.length === 0) {
+            return '';
+        }
+        var formatStr = arguments[0];
+        var args = [].slice.call(arguments, 1);
+        for (var i = 0; i < args.length; i++) {
+            formatStr = formatStr.replace('{' + i + '}', args[i]);
+        };
+        return formatStr;
+    }
     var css = ['open', 'dead'];
     var colors = ['red', 'purple', 'yellow', 'green', 'blue'];
 
@@ -7,6 +18,7 @@
     function Game($graph, options, implementation) {
         this.$graph = $graph;
         this.search = implementation;
+        this.comingCount = 3;
         this.opts = $.extend({
             wallFrequency: .1,
             debug: true,
@@ -66,6 +78,25 @@
             self.cellClicked($(this))
         });
     };
+
+    Game.prototype.fillCells = function() {
+        this.comingCells = this.comingCells || [];
+        var size = this.opts.gridSize;
+        for (var i = 0; i < this.comingCells.length; i++) {
+            var x = ~~ (Math.random() * size),
+                y = ~~ (Math.random() * size),
+                selector = format('span[x={0}][y={1}]', x, y);
+            var cell = $(selector, this.$graph),
+                isWall = cell.attr('wall');
+            while(isWall) {
+                x = ~~ (Math.random() * size);
+                y = ~~ (Math.random() * size);
+                cell = $(selector, this.$graph);
+                isWall = cell.attr('wall');
+            }
+            cell.css('color', this.comingCells[i]);
+        };
+    }
 
     Game.prototype.cellClicked = function($end) {
 
