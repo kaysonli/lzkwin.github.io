@@ -1,0 +1,1 @@
+copy jq.mobi.min.js+html2canvas.js+2048.js script.js /b
