@@ -15,7 +15,7 @@
         wall: 'wall',
         open: 'open'
     }
-    var colors = ['red', 'purple', 'yellow', 'green', 'blue'];
+    var colors = ['#99cc00', '#ffbb33', '#34b5e5', '#ff4444', '#aa66cc'];
 
     var GraphNodeType = {
         OPEN: 1,
@@ -27,13 +27,30 @@
         this.$comingCells = $('#coming-cells');
         this.search = implementation;
         this.comingCount = 5;
+        this.setScoreRule();
+        this.score = 0;
         this.opts = $.extend({
+            bgColor: '#ddd',
             wallFrequency: .1,
             debug: true,
             gridSize: 7
         }, options);
         this.initialize();
     }
+
+    Game.prototype.setScoreRule = function() {
+        this.scoreRule = {
+            '4': 20,
+            '5': 28,
+            '6': 36,
+            '7': 44,
+            '7-2': 80
+        };
+        for (var i = 8; i <= 25; i++) {
+            this.scoreRule[i] = 96 + (i - 8) * 40;
+        }
+    };
+
     Game.prototype.setOption = function(opt) {
         this.opts = $.extend(this.opts, opt);
         if (opt["debug"] || opt["debug"] == false) {
@@ -95,54 +112,68 @@
             function(x, y) {
                 return {
                     x: --x,
-                    y: y
+                    y: y,
+                    direction: 'n-s'
                 };
             },
             function(x, y) {
                 return {
                     x: ++x,
-                    y: y
+                    y: y,
+                    direction: 'n-s'
                 };
             },
             function(x, y) {
                 return {
                     x: x,
-                    y: --y
+                    y: --y,
+                    direction: 'w-e'
                 };
             },
             function(x, y) {
                 return {
                     x: x,
-                    y: ++y
+                    y: ++y,
+                    direction: 'w-e'
                 };
             },
             function(x, y) {
                 return {
                     x: --x,
-                    y: --y
+                    y: --y,
+                    direction: 'nw-se'
+                };
+            },
+            function(x, y) {
+                return {
+                    x: ++x,
+                    y: ++y,
+                    direction: 'nw-se'
                 };
             },
             function(x, y) {
                 return {
                     x: --x,
-                    y: ++y
+                    y: ++y,
+                    direction: 'ne-sw'
                 };
             },
             function(x, y) {
                 return {
                     x: ++x,
-                    y: --y
-                };
-            },
-            function(x, y) {
-                return {
-                    x: ++x,
-                    y: ++y
+                    y: --y,
+                    direction: 'ne-sw'
                 };
             }
         ];
         var cells = [$cell];
-        //up
+        var directionCells = {
+            'w-e': [],
+            'n-s': [],
+            'nw-se': [],
+            'ne-sw': []
+        };
+        var directions = 0;
         var x = $cell.attr('x'),
             y = $cell.attr('y');
         for (var i = 0; i < actions.length; i++) {
@@ -150,7 +181,7 @@
             var cx = cord.x,
                 cy = cord.y;
             var $target = $(format('[x={0}][y={1}]', cx, cy), this.$graph);
-            var search = [];
+            var search = directionCells[cord.direction];
             while ($target.css('background-color') == $cell.css('background-color')) {
                 search.push($target);
                 cord = actions[i](cx, cy);
@@ -160,9 +191,13 @@
             }
             if (search.length >= 3) {
                 cells = cells.concat(search);
+                ++directions;
             }
         }
-        return cells;
+        return {
+            cells: cells,
+            directions: directions
+        };
     };
 
     Game.prototype.fillCells = function() {
@@ -189,11 +224,38 @@
             openList.splice(openIndex, 1);
             grid[x][y] = GraphNodeType.WALL;
             var selector = format('span[x={0}][y={1}]', x, y);
-            var cell = $(selector, this.$graph);
-            cell.css('background-color', this.comingCells[i]);
-            cell.attr('wall', 'wall');
+            var $cell = $(selector, this.$graph);
+            $cell.css('background-color', this.comingCells[i]);
+            $cell.attr('wall', 'wall');
+
+            var adjacentCells = this.getAdjacentCells($cell);
+            if (adjacentCells.cells.length >= 4) {
+                this.clearAway(adjacentCells.cells);
+                this.updateScore(adjacentCells);
+            }
         }
         this.makeComingColors();
+    };
+
+    Game.prototype.clearAway = function(adjacentCells) {
+        for (var i = 0; i < adjacentCells.length; i++) {
+            adjacentCells[i].css('background-color', this.opts.bgColor).removeAttr('wall');
+            this.grid[adjacentCells[i].attr('x')][adjacentCells[i].attr('y')] = GraphNodeType.OPEN;
+        }
+    };
+
+    Game.prototype.updateScore = function(adjacentCells) {
+        var cellCount = adjacentCells.cells.length;
+        if (cellCount != 7) {
+            var score = this.scoreRule[cellCount];
+            this.score += score;
+        } else {
+            if (adjacentCells.directions == 2) {
+                var score = this.scoreRule[cellCount + '-' + '2'];
+                this.score += score;
+            }
+        }
+        $("#score").text(this.score);
     };
 
     Game.prototype.cellClicked = function($cell) {
@@ -215,12 +277,14 @@
             if (!$cell.attr('wall') && path.length > 0 && !(x == startX && y == startY)) {
                 $cell.css('background-color', this.$startCell.css('background-color')).attr('wall', 'wall');
                 this.grid[x][y] = GraphNodeType.WALL;
+
+                this.$startCell.css('background-color', '#ddd').removeAttr('wall');
+                this.grid[startX][startY] = GraphNodeType.OPEN;
+
                 var adjacentCells = this.getAdjacentCells($cell);
-                if (adjacentCells.length >= 4) {
-                    for (var i = 0; i < adjacentCells.length; i++) {
-                        adjacentCells[i].css('background-color', '#ddd').removeAttr('wall');
-                        this.grid[adjacentCells[i].attr('x')][adjacentCells[i].attr('y')] = GraphNodeType.OPEN;
-                    }
+                if (adjacentCells.cells.length >= 4) {
+                    this.clearAway(adjacentCells.cells);
+                    this.updateScore(adjacentCells);
                 } else {
                     this.fillCells();
                 }
