@@ -8,13 +8,13 @@
         var args = [].slice.call(arguments, 1);
         for (var i = 0; i < args.length; i++) {
             formatStr = formatStr.replace('{' + i + '}', args[i]);
-        };
+        }
         return formatStr;
     }
     var css = {
         wall: 'wall',
         open: 'open'
-    }
+    };
     var colors = ['#99cc00', '#ffbb33', '#34b5e5', '#ff4444', '#aa66cc'];
 
     var GraphNodeType = {
@@ -35,8 +35,6 @@
         this.opts = $.extend({
             bgColor: '#ddd',
             movesPerLevel: 40,
-            wallFrequency: .1,
-            debug: true,
             gridSize: 7
         }, options);
 
@@ -59,18 +57,22 @@
 
     Game.prototype.setOption = function(opt) {
         this.opts = $.extend(this.opts, opt);
-        if (opt["debug"] || opt["debug"] == false) {
-            this.drawDebugInfo(opt["debug"]);
-        }
     };
     Game.prototype.initialize = function() {
         var self = this;
         var grid = this.grid = [];
         var $graph = this.$graph;
         $graph.empty();
-
+        $graph.width(window.innerWidth * 0.9).height(window.innerWidth * 0.9);
         var cellWidth = ($graph.width() / this.opts.gridSize) - 2; // -2 for border
         var cellHeight = ($graph.height() / this.opts.gridSize) - 2;
+
+        $("#info").height(cellHeight + 10);
+        $("img.icon").width(cellWidth).height(cellHeight);
+        $(".move-anywhere img").width(cellWidth - 10).height(cellHeight -10);
+        $(".move-anywhere").css("line-height", (cellHeight + 5) + 'px');
+        $("#coming-cells .grid_item").width(cellWidth - 10).height(cellHeight - 10);
+
         var $cellTemplate = $("<span />").addClass("grid_item").width(cellWidth).height(cellHeight);
         var startSet = false;
 
@@ -94,7 +96,8 @@
 
         // bind cell event, set start/wall positions
         this.$cells = $graph.find(".grid_item");
-        this.$cells.click(function() {
+        var event = "ontouchstart" in document.documentElement ? "touchstart" : "click";
+        this.$cells.on(event, function() {
             self.cellClicked($(this));
         });
 
