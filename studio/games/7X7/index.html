@@ -13,8 +13,8 @@
 		}
 
 		#board {
-			width: 560px;
-			height: 560px;
+			width: 550px;
+			height: 550px;
 			margin: 0 auto;
 		}
 
@@ -50,6 +50,44 @@
 			margin-right: 10px;
 		}
 
+		#info {
+			height: 70px;
+			border-bottom: 2px solid #ccc;
+		}
+
+		img.icon {
+			width: 60px;
+			height: 60px;
+			float: left;
+			margin: 5px 0 0 5px;
+		}
+
+		#info .left {
+			float: left;
+			width: 170px;
+		}
+
+		#info .level {
+			margin-left: 65px;
+		}
+
+		#info .right {
+			float: right;
+			width: 100px;
+			height: 69px;
+		}
+
+		.move-anywhere {
+			float: left;
+			line-height: 69px;
+		}
+
+		.move-anywhere img {
+			vertical-align: middle;
+			width: 52px;
+			height: 52px;
+		}
+
 		.clear {
 			clear: both;
 		}
@@ -74,10 +112,37 @@
 		.selected {
 			border-radius: 20px;
 		}
+
+		#game-over {
+			display: none;
+			width: 100%;
+			height: 587px;
+			z-index: 5;
+			opacity: 0.5;
+			background-color: rgb(204, 204, 204);
+			position: absolute;
+			top: 2px;
+			left: 2px;
+		}
+
+		#game-over .content {
+			background-color: #fff;
+			width: 300px;
+			position: absolute;
+			margin: 0 auto;
+		}
+
+		.gainings {
+			font-size: 16px;
+		}
+
+		.gainings-result {
+			font-size: 30px;
+		}
 	</style>
 	<script src="../../../js/jquery-1.7.1.min.js" type="text/javascript"></script>
 	<script src="astar.js" type="text/javascript"></script>
-	<script src="game.js" type="text/javascript"></script>
+	<script src="game.js?v=1" type="text/javascript"></script>
 	<script type="text/javascript">
 		$(function(){
 			var game = new Game($('#board'));
@@ -87,13 +152,26 @@
 <body>
 	<div id="container">
 		<div id="info">
-			<div class="level">LEVEL <label>1</label></div>
-			<div class="tip"><label>23</label> LINES TO NEXT LEVEL</div>
-		</div>
-		<div id="score-area">
 			<div class="left">
-				<div>SCORE</div>
-				<div id="score">0</div>
+				<img src="icon.png" class="icon">
+				<div class="level">LEVEL <label id="level">1</label></div>
+			</div>
+			<div class="right">
+				<div class="move-anywhere">
+					<img src="move-anywhere.png" alt="check to move anywhere">
+				</div>
+				<div>
+					<label id="anywhere-moves">2</label>
+				</div>
+			</div>
+		</div>
+		<div class="tip clear"><label id="movesToNextLevel">40</label> LINES TO NEXT LEVEL</div>
+		<div id="score-area" class="clear">
+			<div class="left">
+				<div class="gainings">SCORE</div>
+				<div id="score" class="gainings-result">0</div>
+				<div class="gainings">COMBO</div>
+				<div id="combo" class="gainings-result">0</div>
 			</div>
 			<div class="right" id="coming-cells">
 				<div class="up-next">UP NEXT</div>
@@ -111,6 +189,19 @@
 			</div>
 		</div>
 		<div id="board" class="clear"></div>
+	</div>
+	<div id="game-over">
+		<div class="content">
+			<div class="title"></div>
+			<div class="gainings">历史最高分</div>
+			<div class="gainings-result" id="record"></div>
+			<div class="gainings">得分</div>
+			<div class="gainings-result" id="final-score"></div>
+			<div class="gainings">最大连招数</div>
+			<div class="gainings-result" id="final-combos"></div>
+			<div class="gainings">回合数</div>
+			<div class="gainings-result" id="turns"></div>
+		</div>
 	</div>
 </body>
 </html>

@@ -26,15 +26,21 @@
         this.$graph = $graph;
         this.$comingCells = $('#coming-cells');
         this.search = implementation;
-        this.comingCount = 5;
+        this.level = 1;
+        this.comingCount = [0, 3, 4, 5, 6];
         this.setScoreRule();
         this.score = 0;
+        this.combo = 0;
+        this.anyWhereMoves = 2;
         this.opts = $.extend({
             bgColor: '#ddd',
+            movesPerLevel: 40,
             wallFrequency: .1,
             debug: true,
             gridSize: 7
         }, options);
+
+        this.leftMovesToNextLevel = this.opts.movesPerLevel;
         this.initialize();
     }
 
@@ -94,11 +100,21 @@
 
         this.makeComingColors();
         this.fillCells();
+
+        $(".move-anywhere img").click(function() {
+            if (self.anyWhereMoves > 0 && !self.anyWhereMovesChecked) {
+                this.src = 'move-anywhere-checked.png';
+                self.anyWhereMovesChecked = true;
+            } else if (self.anyWhereMovesChecked) {
+                this.src = 'move-anywhere.png';
+                self.anyWhereMovesChecked = false;
+            }
+        });
     };
 
     Game.prototype.makeComingColors = function() {
         this.comingCells = [];
-        for (var i = 0; i < this.comingCount; i++) {
+        for (var i = 0; i < this.comingCount[Math.min(this.level, 4)]; i++) {
             var colorIndex = ~~ (Math.random() * colors.length);
             this.comingCells.push(colors[colorIndex]);
             var cell = $("[index=" + i + "]");
@@ -111,14 +127,14 @@
 
             function(x, y) {
                 return {
-                    x: --x,
+                    x: x - 1,
                     y: y,
                     direction: 'n-s'
                 };
             },
             function(x, y) {
                 return {
-                    x: ++x,
+                    x: x + 1,
                     y: y,
                     direction: 'n-s'
                 };
@@ -126,42 +142,42 @@
             function(x, y) {
                 return {
                     x: x,
-                    y: --y,
+                    y: y - 1,
                     direction: 'w-e'
                 };
             },
             function(x, y) {
                 return {
                     x: x,
-                    y: ++y,
+                    y: y + 1,
                     direction: 'w-e'
                 };
             },
             function(x, y) {
                 return {
-                    x: --x,
-                    y: --y,
+                    x: x - 1,
+                    y: y - 1,
                     direction: 'nw-se'
                 };
             },
             function(x, y) {
                 return {
-                    x: ++x,
-                    y: ++y,
+                    x: x + 1,
+                    y: y + 1,
                     direction: 'nw-se'
                 };
             },
             function(x, y) {
                 return {
-                    x: --x,
-                    y: ++y,
+                    x: x - 1,
+                    y: y + 1,
                     direction: 'ne-sw'
                 };
             },
             function(x, y) {
                 return {
-                    x: ++x,
-                    y: --y,
+                    x: x + 1,
+                    y: y - 1,
                     direction: 'ne-sw'
                 };
             }
@@ -177,7 +193,7 @@
         var x = $cell.attr('x'),
             y = $cell.attr('y');
         for (var i = 0; i < actions.length; i++) {
-            var cord = actions[i](x, y);
+            var cord = actions[i](~~x, ~~y);
             var cx = cord.x,
                 cy = cord.y;
             var $target = $(format('[x={0}][y={1}]', cx, cy), this.$graph);
@@ -189,7 +205,7 @@
                 cy = cord.y;
                 $target = $(format('[x={0}][y={1}]', cx, cy), this.$graph);
             }
-            if (search.length >= 3) {
+            if (search.length >= 3 && i % 2 === 1) {
                 cells = cells.concat(search);
                 ++directions;
             }
@@ -198,6 +214,11 @@
             cells: cells,
             directions: directions
         };
+    };
+
+    Game.prototype.setGameOver = function() {
+        this.gameOver = true;
+        $('#game-over').show();
     };
 
     Game.prototype.fillCells = function() {
@@ -216,6 +237,10 @@
                     });
                 }
             }
+        }
+        if (openList.length === 0) {
+            this.setGameOver();
+            return;
         }
         for (var i = 0; i < this.comingCells.length; i++) {
             var openIndex = ~~ (Math.random() * openList.length);
@@ -246,16 +271,20 @@
 
     Game.prototype.updateScore = function(adjacentCells) {
         var cellCount = adjacentCells.cells.length;
-        if (cellCount != 7) {
-            var score = this.scoreRule[cellCount];
+        if (cellCount == 7 && adjacentCells.directions == 2) {
+            var score = this.scoreRule[cellCount + '-' + '2'];
             this.score += score;
         } else {
-            if (adjacentCells.directions == 2) {
-                var score = this.scoreRule[cellCount + '-' + '2'];
-                this.score += score;
-            }
+            var score = this.scoreRule[cellCount];
+            this.score += score;
         }
+        document.getElementById('score').innerText = this.score;
         $("#score").text(this.score);
+
+        if (adjacentCells.directions > 1) {
+            ++this.anyWhereMoves;
+            $("#anywhere-moves").text(this.anyWhereMoves);
+        }
     };
 
     Game.prototype.cellClicked = function($cell) {
@@ -274,7 +303,7 @@
             var endSet = this.graph.grid[x][y];
             this.$startCell.removeClass('selected');
             var path = astar.search(this.graph, startSet, endSet);
-            if (!$cell.attr('wall') && path.length > 0 && !(x == startX && y == startY)) {
+            if (!$cell.attr('wall') && (path.length > 0 || this.anyWhereMovesChecked) && !(x == startX && y == startY)) {
                 $cell.css('background-color', this.$startCell.css('background-color')).attr('wall', 'wall');
                 this.grid[x][y] = GraphNodeType.WALL;
 
@@ -283,12 +312,29 @@
 
                 var adjacentCells = this.getAdjacentCells($cell);
                 if (adjacentCells.cells.length >= 4) {
+                    this.combo++;
                     this.clearAway(adjacentCells.cells);
                     this.updateScore(adjacentCells);
+
+                    --this.leftMovesToNextLevel;
+                    if (this.leftMovesToNextLevel === 0) {
+                        ++this.level;
+                        $("#level").text(this.level);
+                        this.leftMovesToNextLevel = this.opts.movesPerLevel;
+                    }
+                    $("#movesToNextLevel").text(this.leftMovesToNextLevel);
                 } else {
+                    this.combo = 0;
                     this.fillCells();
                 }
-                console.log(adjacentCells);
+                $("#combo").text(this.combo);
+
+                if (this.anyWhereMovesChecked) {
+                    --this.anyWhereMoves;
+                    $("#anywhere-moves").text(this.anyWhereMoves);
+                    $(".move-anywhere img").attr('src', 'move-anywhere.png');
+                    this.anyWhereMovesChecked = false;
+                }
             }
             this.$startCell = null;
         }
