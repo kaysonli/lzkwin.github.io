@@ -32,6 +32,7 @@
         this.score = 0;
         this.combo = 0;
         this.anyWhereMoves = 2;
+        this.turns = 0;
         this.opts = $.extend({
             bgColor: '#ddd',
             movesPerLevel: 40,
@@ -97,37 +98,7 @@
         // bind cell event, set start/wall positions
         this.$cells = $graph.find(".grid_item");
         var event = "ontouchstart" in document.documentElement ? "touchstart" : "click";
-        // if ("ontouchstart" in document.documentElement) {
-        //     $graph[0].addEventListener('touchstart', function(evt) {
-        //         evt.preventDefault();
-        //         var tap = evt.touches[0];
-        //         var debug = 'pageX: ' + tap.pageX + ', pageY: ' + tap.pageY;
-        //         // debug = 'start:' + tap.target.getAttribute('x') + ',' + tap.target.getAttribute('y');
-        //         document.title = debug;
-        //         self.cellClicked($(tap.target));
-        //     });
-        //     $graph[0].addEventListener('touchmove', function(evt) {
-        //         var tap = evt.touches[0];
-        //         var cell = document.elementFromPoint(tap.pageX, tap.pageY);
-        //         if(cell && cell.getAttribute('x') !== null) {
-        //             self.cellClicked($(cell));
-        //         }
-        //     });
-        //     $graph[0].addEventListener('touchend', function(evt) {
-        //         // if ((!window.navigator.msPointerEnabled && event.touches.length > 0) ||
-        //         //     event.targetTouches > 0) {
-        //         //     return; // Ignore if still touching with one or more fingers or input
-        //         // }
-        //         var debug = 'touch end, pageX: ' + evt.pageX + ', pageY: ' + evt.pageY;
-        //         var cell = document.elementFromPoint(evt.pageX, evt.pageY);
-        //         if(cell) {
-        //             // debug = 'touch end: ' + cell.getAttribute('x') + ', ' + cell.getAttribute('y');
-        //         }
-        //         // debug = 'end:' + evt.target.getAttribute('x') + ',' + evt.target.getAttribute('y');
-        //         // document.title = debug;
-        //         // self.cellClicked($(evt.target));
-        //     });
-        // }
+
         this.$cells.on(event, function(evt) {
             console.log(evt);
             self.cellClicked($(this));
@@ -257,6 +228,56 @@
     Game.prototype.setGameOver = function() {
         this.gameOver = true;
         $('#game-over').show();
+        this.showResultPanel();
+    };
+
+    Game.prototype.showResultPanel = function() {
+        var cur_score = this.score;
+        var zs_num, fy_num, sd_num, level;
+        if (cur_score < 2000) {
+            zs_num = 56;
+            fy_num = 70;
+            sd_num = 60;
+
+            level_name = '常人';
+            zs_num += Math.floor((cur_score / 2000) * 200 + 8) / 10;
+            fy_num += Math.floor((cur_score / 2000) * 200 + 1) / 10;
+            sd_num += Math.floor((cur_score / 2000) * 200 + 5) / 10;
+        } else if (cur_score < 4000) {
+            zs_num = 56;
+            fy_num = 70;
+            sd_num = 60;
+
+            level_name = '高手';
+            zs_num += Math.floor((cur_score / 4000) * 200 + 8) / 10;
+            fy_num += Math.floor((cur_score / 4000) * 200 + 1) / 10;
+            sd_num += Math.floor((cur_score / 4000) * 200 + 5) / 10;
+        } else if (cur_score < 6000) {
+            zs_num = 68;
+            fy_num = 70;
+            sd_num = 72;
+
+            level_name = '专家';
+            zs_num += Math.floor((cur_score / 6000) * 200 + 2) / 10;
+            fy_num += Math.floor((cur_score / 6000) * 200 + 7) / 10;
+            sd_num += Math.floor((cur_score / 6000) * 200 + 6) / 10;
+        } else if (cur_score < 10000) {
+            zs_num = 79;
+            fy_num = 75;
+            sd_num = 78;
+
+            level_name = '大师';
+            zs_num += Math.floor((cur_score / 10000) * 200 + 4) / 10;
+            fy_num += Math.floor((cur_score / 10000) * 200 + 1) / 10;
+            sd_num += Math.floor((cur_score / 10000) * 200 + 5) / 10;
+        } else if (cur_score > 10000) {
+            level_name = '神';
+            zs_num = 99;
+            fy_num = 99;
+            sd_num = 99;
+        }
+        $('#result_content').html('<span style="font-size:36px;"><font color="#fce700">' + cur_score + '!</font></span><br/><br/>' + '天呐！在中国地区<br/>' + '您的智商 <font color="#fc4d35">>' + zs_num + '％</font> 的人<br/>' + '反应速度 <font color="#fc4d35">>' + fy_num + '％</font> 的人<br/>' + '协调能力 <font color="#fc4d35">>' + sd_num + '％</font> 的人<br/><br/>' + '您属于<span style="color:#04e5f9; font-size:30px;">' + level_name + '</span>级别！');
+        document.title = format('7X7消除，我大战{0}回合，得了{1}分，你能比我更高吗？', this.turns, this.score);
     };
 
     Game.prototype.fillCells = function() {
@@ -276,10 +297,6 @@
                 }
             }
         }
-        if (openList.length === 0) {
-            this.setGameOver();
-            return;
-        }
         for (var i = 0; i < this.comingCells.length; i++) {
             var openIndex = ~~ (Math.random() * openList.length);
             var x = openList[openIndex].x,
@@ -295,6 +312,9 @@
             if (adjacentCells.cells.length >= 4) {
                 this.clearAway(adjacentCells.cells);
                 this.updateScore(adjacentCells);
+            } else if (openList.length === 0) {
+                this.setGameOver();
+                return;
             }
         }
         this.makeComingColors();
@@ -351,6 +371,7 @@
                 var adjacentCells = this.getAdjacentCells($cell);
                 if (adjacentCells.cells.length >= 4) {
                     this.combo++;
+                    this.turns++;
                     this.clearAway(adjacentCells.cells);
                     this.updateScore(adjacentCells);
 
@@ -383,4 +404,100 @@
     };
 
     window.Game = Game;
+})();
+
+(function() {
+    var dataForWeixin = {
+        appId: "wxa9826dac1b1390c4",
+        MsgImg: "http://www.zoneky.com/studio/games/2048/72.png",
+        TLImg: "http://www.zoneky.com/studio/games/7X7/7X7.png",
+        url: "http://www.zoneky.com/studio/games/7X7/?from=share",
+        title: document.title,
+        desc: document.title,
+        fakeid: "",
+        callback: function() {}
+    };
+
+    var mebtnopenurl = 'http://mp.weixin.qq.com/s?__biz=MzA5OTg3MTcyOA==&mid=200360286&idx=1&sn=d744e54a4cfe69fc749707c5ea00f4a7#rd';
+
+    function wexin_share(type) {
+        dataForWeixin.title = document.title;
+        dataForWeixin.desc = document.title;
+        if (type === 2) {
+            WeixinJSBridge.invoke('sendAppMessage', {
+                "img_url": dataForWeixin.MsgImg,
+                "img_width": "120",
+                "img_height": "120",
+                "link": dataForWeixin.url,
+                "desc": dataForWeixin.desc,
+                "title": dataForWeixin.title
+            }, function(res) {
+                // document.location.href = mebtnopenurl;
+            });
+        } else {
+            WeixinJSBridge.invoke('shareTimeline', {
+                "img_url": dataForWeixin.TLImg,
+                "img_width": "120",
+                "img_height": "120",
+                "link": dataForWeixin.url,
+                "desc": dataForWeixin.desc,
+                "title": dataForWeixin.title
+            }, function(res) {
+                // document.location.href = mebtnopenurl;
+            });
+        }
+    }
+
+    (function() {
+
+        var onBridgeReady = function() {
+
+            WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+                wexin_share(2);
+            });
+
+            WeixinJSBridge.on('menu:share:timeline', function(argv) {
+                wexin_share(1);
+            });
+
+            WeixinJSBridge.on('menu:share:weibo', function(argv) {
+                dataForWeixin.title = document.title;
+                dataForWeixin.desc = document.title;
+                WeixinJSBridge.invoke('shareWeibo', {
+                    "img_url": dataForWeixin.TLImg,
+                    "img_width": "120",
+                    "img_height": "120",
+                    "content": dataForWeixin.title,
+                    "url": dataForWeixin.url
+
+                }, function(res) {
+                    (dataForWeixin.callback)();
+                });
+
+            });
+
+            WeixinJSBridge.on('menu:share:facebook', function(argv) {
+                (dataForWeixin.callback)();
+
+                WeixinJSBridge.invoke('shareFB', {
+                    "img_url": dataForWeixin.TLImg,
+                    "img_width": "120",
+                    "img_height": "120",
+                    "link": dataForWeixin.url,
+                    "desc": dataForWeixin.desc,
+
+                    "title": dataForWeixin.title
+                }, function(res) {});
+            });
+        };
+
+        if (document.addEventListener) {
+            document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+
+        } else if (document.attachEvent) {
+
+            document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+            document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+        }
+    })();
 })();

@@ -425,7 +425,7 @@ HTMLActuator.prototype.message = function(won) {
   //this.clearContainer(this.sharingContainer);
   this.messageContainer.classList.add(type);
   game_over = 1;
-  $('#result_number').html(max_number + '锛�');
+  $('#result_number').html(max_number + '');
   $('#msg_box').show();
   set_title();
 
