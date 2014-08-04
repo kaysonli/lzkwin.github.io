@@ -119,15 +119,14 @@
 		}
 
 		#game-over {
-			display: none;
-			width: 100%;
-			height: 587px;
-			z-index: 5;
-			opacity: 0.5;
-			background-color: rgb(204, 204, 204);
-			position: absolute;
-			top: 2px;
-			left: 2px;
+			position: absolute; 
+			top: 0px; 
+			left: 0px; 
+			width: 100%; 
+			height: 100%; 
+			z-index: 10000; 
+			display: none; 
+			background: rgba(0, 0, 0, 0.9);
 		}
 
 		#game-over .content {
@@ -196,52 +195,24 @@
 		</div>
 		<div id="board" class="clear"></div>
 	</div>
-	<div id="game-over">
-		<div class="content">
-			<div class="title"></div>
-			<div class="gainings">历史最高分</div>
-			<div class="gainings-result" id="record"></div>
-			<div class="gainings">得分</div>
-			<div class="gainings-result" id="final-score"></div>
-			<div class="gainings">最大连招数</div>
-			<div class="gainings-result" id="final-combos"></div>
-			<div class="gainings">回合数</div>
-			<div class="gainings-result" id="turns"></div>
+	<div style="" id="game-over" jqmoldstyle="block">
+		<p style=" text-align:center;padding-left:50px;">
+			<img src="share.png?3" width="204"></p>
+		<div style="width:220px;height:250px; top:20px; left:25px;background:rgba(0,0,0,0.3);border:1px rgba(255,255,255,0.3) solid;border-radius:6px;padding:15px; text-align:center; position:relative;"> <i style="position:absolute; background:url(close.png); width:29px;height:29px; background-size:29px 29px; top:-10px;right:-14px;" onclick="$('#game-over').hide();"></i>
+			<center style="line-height:25px;font-size:20px;margin-top:20px;color:#eee;" 
+			id="result_content">
+				<div class="title"></div>
+				<div class="gainings">历史最高分</div>
+				<div class="gainings-result" id="record"></div>
+				<div class="gainings">得分</div>
+				<div class="gainings-result" id="final-score"></div>
+				<div class="gainings">最大连招数</div>
+				<div class="gainings-result" id="final-combos"></div>
+				<div class="gainings">回合数</div>
+				<div class="gainings-result" id="turns"></div>
+			</center>
+
 		</div>
 	</div>
-	<div style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 10000; display: none; background: rgba(0, 0, 0, 0.901961);" id="result_div" jqmoldstyle="block">
-	<p style=" text-align:center;padding-left:50px;">
-		<img src="share.png?3" width="204">
-	</p>
-	<div style="width:220px;height:250px; top:20px; left:25px;background:rgba(0,0,0,0.3);border:1px rgba(255,255,255,0.3) solid;border-radius:6px;padding:15px; text-align:center; position:relative;"> <i style="position:absolute; background:url(close.png); width:29px;height:29px; background-size:29px 29px; top:-10px;right:-14px;" onclick="$('#result_div').hide();"></i>
-
-		<center style="line-height:25px;font-size:20px;margin-top:20px;color:#eee;" id="result_content">
-			<span style="font-size:36px;">
-				<font color="#fce700">2857!</font>
-			</span>
-			<br>
-			<br>
-			天啦！在中国地区
-			<br>
-			您的智商
-			<font color="#fc4d35">&gt;76％</font>
-			的人
-			<br>
-			反应速度
-			<font color="#fc4d35">&gt;78％</font>
-			的人
-			<br>
-			协调能力
-			<font color="#fc4d35">&gt;82％</font>
-			的人
-			<br>
-			<br>
-			您属于
-			<span style="color:#04e5f9; font-size:30px;">大师</span>
-			级别！
-		</center>
-
-	</div>
-</div>
 </body>
 </html>
