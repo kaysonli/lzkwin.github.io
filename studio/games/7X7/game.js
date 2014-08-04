@@ -69,7 +69,7 @@
 
         $("#info").height(cellHeight + 10);
         $("img.icon").width(cellWidth).height(cellHeight);
-        $(".move-anywhere img").width(cellWidth - 10).height(cellHeight -10);
+        $(".move-anywhere img").width(cellWidth - 10).height(cellHeight - 10);
         $(".move-anywhere").css("line-height", (cellHeight + 5) + 'px');
         $("#coming-cells .grid_item").width(cellWidth - 10).height(cellHeight - 10);
 
@@ -97,19 +97,54 @@
         // bind cell event, set start/wall positions
         this.$cells = $graph.find(".grid_item");
         var event = "ontouchstart" in document.documentElement ? "touchstart" : "click";
-        this.$cells.on(event, function() {
+        // if ("ontouchstart" in document.documentElement) {
+        //     $graph[0].addEventListener('touchstart', function(evt) {
+        //         evt.preventDefault();
+        //         var tap = evt.touches[0];
+        //         var debug = 'pageX: ' + tap.pageX + ', pageY: ' + tap.pageY;
+        //         // debug = 'start:' + tap.target.getAttribute('x') + ',' + tap.target.getAttribute('y');
+        //         document.title = debug;
+        //         self.cellClicked($(tap.target));
+        //     });
+        //     $graph[0].addEventListener('touchmove', function(evt) {
+        //         var tap = evt.touches[0];
+        //         var cell = document.elementFromPoint(tap.pageX, tap.pageY);
+        //         if(cell && cell.getAttribute('x') !== null) {
+        //             self.cellClicked($(cell));
+        //         }
+        //     });
+        //     $graph[0].addEventListener('touchend', function(evt) {
+        //         // if ((!window.navigator.msPointerEnabled && event.touches.length > 0) ||
+        //         //     event.targetTouches > 0) {
+        //         //     return; // Ignore if still touching with one or more fingers or input
+        //         // }
+        //         var debug = 'touch end, pageX: ' + evt.pageX + ', pageY: ' + evt.pageY;
+        //         var cell = document.elementFromPoint(evt.pageX, evt.pageY);
+        //         if(cell) {
+        //             // debug = 'touch end: ' + cell.getAttribute('x') + ', ' + cell.getAttribute('y');
+        //         }
+        //         // debug = 'end:' + evt.target.getAttribute('x') + ',' + evt.target.getAttribute('y');
+        //         // document.title = debug;
+        //         // self.cellClicked($(evt.target));
+        //     });
+        // }
+        this.$cells.on(event, function(evt) {
+            console.log(evt);
             self.cellClicked($(this));
         });
 
         this.makeComingColors();
         this.fillCells();
 
-        $(".move-anywhere img").click(function() {
+        $(".move-anywhere").on(event, function(event) {
+            console.log(event);
             if (self.anyWhereMoves > 0 && !self.anyWhereMovesChecked) {
-                this.src = 'move-anywhere-checked.png';
+                $(this).find('img.on').show();
+                $(this).find('img.off').hide();
                 self.anyWhereMovesChecked = true;
             } else if (self.anyWhereMovesChecked) {
-                this.src = 'move-anywhere.png';
+                $(this).find('img.on').hide();
+                $(this).find('img.off').show();
                 self.anyWhereMovesChecked = false;
             }
         });
