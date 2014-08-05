@@ -1,4 +1,10 @@
-;
+$(function() {
+    var game = new Game($('#board'));
+    $("#restart").click(function() {
+        $("#game-over").hide();
+        var game = new Game($('#board'));
+    });
+});
 (function() {
     function format() {
         if (arguments.length === 0) {
@@ -64,7 +70,14 @@
         var grid = this.grid = [];
         var $graph = this.$graph;
         $graph.empty();
-        $graph.width(window.innerWidth * 0.9).height(window.innerWidth * 0.9);
+        var gameBoardWidth = 560;
+        if ("ontouchstart" in document.documentElement) {
+            gameBoardWidth = window.innerWidth * 0.9;
+            $("#container").addClass('container-mobile');
+        } else {
+            $("#container").addClass('container-desktop');
+        }
+        $graph.width(gameBoardWidth).height(gameBoardWidth);
         var cellWidth = ($graph.width() / this.opts.gridSize) - 2; // -2 for border
         var cellHeight = ($graph.height() / this.opts.gridSize) - 2;
 
@@ -391,7 +404,8 @@
                 if (this.anyWhereMovesChecked) {
                     --this.anyWhereMoves;
                     $("#anywhere-moves").text(this.anyWhereMoves);
-                    $(".move-anywhere img").attr('src', 'move-anywhere.png');
+                    $('img.on').hide();
+                    $('img.off').show();
                     this.anyWhereMovesChecked = false;
                 }
             }
