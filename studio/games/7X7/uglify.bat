@@ -1,0 +1,1 @@
+copy jquery-1.7.1.min.js+astar.js+game.js script.js /b

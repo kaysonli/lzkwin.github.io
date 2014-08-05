@@ -409,7 +409,7 @@
 (function() {
     var dataForWeixin = {
         appId: "wxa9826dac1b1390c4",
-        MsgImg: "http://www.zoneky.com/studio/games/2048/72.png",
+        MsgImg: "http://www.zoneky.com/studio/games/7X7/7X7.png",
         TLImg: "http://www.zoneky.com/studio/games/7X7/7X7.png",
         url: "http://www.zoneky.com/studio/games/7X7/?from=share",
         title: document.title,
