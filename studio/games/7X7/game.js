@@ -90,7 +90,7 @@ $(function() {
         $(".move-anywhere").css("line-height", (cellHeight + 5) + 'px');
         $("#coming-cells .grid_item").width(cellWidth - 10).height(cellHeight - 10);
 
-        var $cellTemplate = $("<span />").addClass("grid_item").width(cellWidth).height(cellHeight);
+        var $cellTemplate = $("<span><span class='grid_item_inner' /></span>").addClass("grid_item").width(cellWidth).height(cellHeight);
         var startSet = false;
 
         for (var x = 0; x < this.opts.gridSize; x++) {
@@ -102,7 +102,8 @@ $(function() {
             for (var y = 0; y < this.opts.gridSize; y++) {
                 var id = "cell_" + x + "_" + y;
                 var $cell = $cellTemplate.clone();
-                $cell.attr("id", id).attr("x", x).attr("y", y);
+                // $cell.attr("id", id).attr("x", x).attr("y", y);
+                $cell.find('.grid_item_inner').attr("id", id).attr("x", x).attr("y", y);
                 $row.append($cell);
                 row.push(GraphNodeType.OPEN);
             }
@@ -112,7 +113,7 @@ $(function() {
         // this.graph = new Graph(grid);
 
         // bind cell event, set start/wall positions
-        this.$cells = $graph.find(".grid_item");
+        this.$cells = $graph.find(".grid_item_inner");
         var event = "ontouchstart" in document.documentElement ? "touchstart" : "click";
 
         this.$cells.on(event, function(evt) {
@@ -324,6 +325,16 @@ $(function() {
             $cell.css('background-color', this.comingCells[i]);
             $cell.attr('wall', 'wall');
 
+            var w = $cell.width(),
+                h = $cell.height();
+            $cell.width(0).height(0);
+            $cell.animate({
+                width: w,
+                height: h
+            }, 'slow', null, function() {
+
+            });
+
             var adjacentCells = this.getAdjacentCells($cell);
             if (adjacentCells.cells.length >= 4) {
                 this.clearAway(adjacentCells.cells);
@@ -337,9 +348,18 @@ $(function() {
     };
 
     Game.prototype.clearAway = function(adjacentCells) {
+        var self = this;
         for (var i = 0; i < adjacentCells.length; i++) {
-            adjacentCells[i].css('background-color', this.opts.bgColor).removeAttr('wall');
-            this.grid[adjacentCells[i].attr('x')][adjacentCells[i].attr('y')] = GraphNodeType.OPEN;
+            adjacentCells[i].animate({
+                width: 0,
+                height: 0
+            }, 'slow', null, (function(i) {
+                return function() {
+                    adjacentCells[i].css('background-color', self.opts.bgColor).removeAttr('wall');
+                    self.grid[adjacentCells[i].attr('x')][adjacentCells[i].attr('y')] = GraphNodeType.OPEN;
+                    adjacentCells[i].css('width', '100%').css('height', '100%');
+                }
+            })(i));
         }
     };
 
