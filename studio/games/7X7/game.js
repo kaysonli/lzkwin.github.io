@@ -1,5 +1,5 @@
 $(function() {
-    if('ontouchstart' in document.documentElement) {
+    if ('ontouchstart' in document.documentElement) {
         $("#bdshare").hide();
     }
     var game = new Game($('#board'));
@@ -73,7 +73,7 @@ $(function() {
         var grid = this.grid = [];
         var $graph = this.$graph;
         $graph.empty();
-        var gameBoardWidth = 560;
+        var gameBoardWidth = ~~ ((window.innerHeight - 200) * 7 / 8);
         if ("ontouchstart" in document.documentElement) {
             gameBoardWidth = window.innerWidth * 0.9;
             $("#container").addClass('container-mobile');
