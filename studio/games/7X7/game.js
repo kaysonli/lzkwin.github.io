@@ -1,4 +1,7 @@
 $(function() {
+    if('ontouchstart' in document.documentElement) {
+        $("#bdshare").hide();
+    }
     var game = new Game($('#board'));
     $("#restart").click(function() {
         $("#game-over").hide();
