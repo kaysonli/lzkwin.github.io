@@ -381,6 +381,33 @@ $(function() {
         }
     };
 
+    Game.prototype.hintUnreachable = function($cell) {
+        var allCells = $(".grid_item_inner");
+        var startX = $cell.attr('x'),
+            startY = $cell.attr('y');
+        var startSet = this.graph.grid[startX][startY];
+        var self = this;
+        allCells.each(function() {
+            var x = $(this).attr('x'),
+                y = $(this).attr('y'),
+                isWall = $(this).attr('wall');
+            if(x == startX && y == startY || isWall) {
+                return;
+            }
+            var endSet = self.graph.grid[x][y];
+            var path = astar.search(self.graph, startSet, endSet);
+            if(path.length == 0) {
+                $(this).addClass('unreachable');
+            } else {
+                $(this).removeClass('unreachable');
+            }
+        });
+    };
+
+    Game.prototype.clearHint = function() {
+        $(".grid_item_inner").removeClass('unreachable');
+    };
+
     Game.prototype.cellClicked = function($cell) {
         this.graph = new Graph(this.grid);
         var x = $cell.attr('x'),
@@ -389,6 +416,7 @@ $(function() {
             if ($cell.attr('wall')) {
                 $cell.addClass('selected');
                 this.$startCell = $cell;
+                this.hintUnreachable($cell);
             }
         } else {
             var startX = this.$startCell.attr('x'),
@@ -396,6 +424,7 @@ $(function() {
             var startSet = this.graph.grid[startX][startY];
             var endSet = this.graph.grid[x][y];
             this.$startCell.removeClass('selected');
+            this.clearHint();
             var path = astar.search(this.graph, startSet, endSet);
             if (!$cell.attr('wall') && (path.length > 0 || this.anyWhereMovesChecked) && !(x == startX && y == startY)) {
                 $cell.css('background-color', this.$startCell.css('background-color')).attr('wall', 'wall');
