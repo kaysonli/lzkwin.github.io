@@ -391,7 +391,7 @@ $(function() {
             var x = $(this).attr('x'),
                 y = $(this).attr('y'),
                 isWall = $(this).attr('wall');
-            if(x == startX && y == startY || isWall) {
+            if(x == startX && y == startY || isWall || self.anyWhereMovesChecked) {
                 return;
             }
             var endSet = self.graph.grid[x][y];
