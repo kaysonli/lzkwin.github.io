@@ -1,6 +1,10 @@
 $(function() {
     if ('ontouchstart' in document.documentElement) {
         $("#bdshare").hide();
+        $("#qrcode").hide();
+    } else {
+        $("#bdshare").show();
+        $("#qrcode").append($('<img src="qrcode.png" alt="扫一扫，在微信上玩" />')).show();
     }
     var game = new Game($('#board'));
     $("#restart").click(function() {
