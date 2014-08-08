@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS Selectors</title>
+	<style type="text/css">
+		li:first-child {
+			color: red;
+		}
+		li:last-child {
+			color: blue;
+		}
+		li:nth-child(3) {
+			border: 1px solid red;
+		}
+		div:only-child {
+			color: yellow;
+		}
+		ul[data]{
+			list-style: square;
+		}
+
+		input:disabled {
+			border: 1px solid red;
+			background-color: #99ccdd;
+		}
+
+		input:focus {
+			border-style: dashed;
+		}
+		a:after {
+		  color: #9799a7;
+		  content: " (" attr(href) ")";
+		  font-size: 11px;
+		}
+
+		body {
+		  color: #fff;
+		  font: 600 14px/24px "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", Sans-Serif;
+		}
+		.box-set,
+		.box {
+		  border-radius: 6px;
+		}
+		.box-set:before,
+		.box-set:after {
+		  content: "";
+		  display: table;
+		}
+		.box-set:after {
+		  clear: both;
+		}
+		.box-set {
+			/*overflow: auto;*/
+		  background: #eaeaed;
+		  *zoom: 1;
+		}
+		.box {
+		  background: #2db34a;
+		  box-shadow: 0 15px 20px #ff7b29;
+		  float: left;
+		  margin: 1.858736059%;
+		  padding: 20px 0;
+		  text-align: center;
+		  width: 29.615861214%;
+		}
+		.box:nth-child(2) {
+		  position: relative;
+		  top: 20px;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li>This list item will be selected</li>
+		<li>
+			<div>This div will be selected</div>
+		</li>
+		<li>
+			<div>...</div>
+			<div>...</div>
+		</li>
+		<li>This list item will be selected</li>
+	</ul>
+	<ul data="sel">
+		<li>This ul will be selected.</li>
+	</ul>
+	<input type="text"  />
+	<a href="http://google.com/">Search the Web</a>
+	<a href="http://learn.shayhowe.com/">Learn How to Build Websites</a>
+
+	<div class="box-set">
+	  <div class="box">Box 1</div>
+	  <div class="box">Box 2</div>
+	  <div class="box">Box 3</div>
+	</div>
+</body>
+</html>

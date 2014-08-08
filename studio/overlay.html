@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Overlay Demo</title>
+	<style type="text/css">
+		.overlay {
+			position: absolute;
+			left: 0; top: 0; bottom: 0; right: 0;
+			background-color: #ccc;
+			opacity: .5;
+			display: none;
+		}
+
+		.button {
+			cursor: pointer;
+			border: 1px solid #ccc;
+		}
+
+		.modal {
+			width: 200px; height: 200px;
+			position: absolute;
+			left: 50%; top: 50%;
+			margin-left: -100px;
+			margin-top: -100px;
+			background-color: #ddd;
+			display: none;
+		}
+
+		#toggle {
+			position: absolute;
+			left: -10000px;
+			margin: 0; padding: 0;
+			border-width: 0;
+		}
+
+		#toggle:checked ~ .overlay,
+		#toggle:checked ~ .modal {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<input type="checkbox" id="toggle" />
+	<label for="toggle" class="button">Open</label>
+	<label class="overlay" for="toggle"></label>
+	<div class="modal">
+		<label for="toggle" class="button">Close</label>
+	</div>
+</body>
+</html>
