@@ -13,8 +13,14 @@
 		}
 
 		.button {
+			padding: 3px;
 			cursor: pointer;
 			border: 1px solid #ccc;
+		}
+
+		.button:hover {
+			background-color: blue;
+			color: white;
 		}
 
 		.modal {
@@ -42,10 +48,11 @@
 </head>
 <body>
 	<input type="checkbox" id="toggle" />
-	<label for="toggle" class="button">Open</label>
+	<label for="toggle" class="button">Open Dialog</label>
 	<label class="overlay" for="toggle"></label>
 	<div class="modal">
 		<label for="toggle" class="button">Close</label>
+		<h4>Modal Dialog Demo</h4>
 	</div>
 </body>
 </html>
