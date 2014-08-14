@@ -68,6 +68,26 @@
 		  position: relative;
 		  top: 20px;
 		}
+
+		.float {
+			overflow: auto;
+		}
+
+		.float div {
+			width: 200px;
+			height: 50px;
+			border: 2px solid yellow;
+		}
+
+		.float .left {
+			background-color: red;
+			float: left;
+		}
+
+		.float .right {
+			background-color: blue;
+			text-align: right;
+		}
 	</style>
 </head>
 <body>
@@ -93,6 +113,10 @@
 	  <div class="box">Box 1</div>
 	  <div class="box">Box 2</div>
 	  <div class="box">Box 3</div>
+	</div>
+	<div class="float">
+		<img class="left" src="http://www.zoneky.com/studio/games/7X7/7X7.png" alt="">
+		<div class="right">Floats are also helpful for layout in smaller instances. Take for example this little area of a web page. If we use float for our little avatar image, when that image changes size the text in the box will reflow to accommodate</div>
 	</div>
 </body>
 </html>
