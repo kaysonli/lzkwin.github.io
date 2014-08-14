@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>jQuery Color Picker Sliders</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An advanced responsive color selector with color swatches and support for human perceived lightness. Works in all modern browsers and on touch devices.">
+
+    <link href="jquery-colorpickersliders/jquery.colorpickersliders.css" rel="stylesheet" type="text/css" media="all">
+
+    <script src="libraries/jquery-1.9.0.min.js"></script>
+    <script src="libraries/tinycolor.js"></script>
+    <script src="jquery-colorpickersliders/jquery.colorpickersliders.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <form class="form-horizontal" action="#">
+            <div class="control-group">
+                <label class="control-label" for="color">Color:</label>
+                <div class="controls controls-row">
+                    <input id="color" type="text" class="demo-popup" value="#56B29A" data-color-format="hex">
+                </div>
+            </div>
+        </form>
+        <script>
+                $('.demo-popup').ColorPickerSliders({
+                    previewontriggerelement: true,
+                    flat: false,
+                    color: '#cf966f',
+                    customswatches: false,
+                    swatches: ['red', 'green', 'blue'],
+                    order: {
+                        rgb: 1,
+                        preview: 2
+                    }
+                });
+            </script>
+
+    </div>
+
+</body>
