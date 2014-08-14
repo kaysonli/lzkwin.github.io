@@ -1,0 +1,24 @@
+/*
+	 http://css-tricks.com
+*/
+
+*					{ margin: 0; padding: 0; }
+body				{ font: 15px/2 Georgia, serif; background: #999; }
+
+h1                  { color: white; padding: 10px; }
+
+#page-wrap		    { max-width: 960px; min-width: 560px; margin: 0 auto; position: relative; }
+
+#header             { max-width: 960px; min-width: 560px; background: #222;
+                      margin: 15px auto 0; }
+
+#main-content       { padding: 0 190px 0 10px; background: white; }
+
+#main-sidebar       { position: absolute; right: 0; top: 0; width: 160px; bottom: 0%;
+                      background: #eee; padding: 0 10px }
+                      
+#footer             { max-width: 960px; min-width: 560px; background: #222;
+                      margin: 0 auto 15px; }
+#footer p           { padding: 10px; color: white; }
+#footer a           { color: white; border-bottom: 1px dotted white; text-decoration: none; }
+#footer a:hover     { border-bottom-style: solid; }
