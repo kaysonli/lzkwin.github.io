@@ -13,14 +13,42 @@
 		    margin-right:10px;      /*图片右侧与文字的边距*/
 		    margin-bottom:5px;   /*图片下部与文字的边距*/
 		}
+
+		.float-box {
+			overflow: hidden;
+			border: 1px solid #ff0;
+			padding: 10px;
+		}
+
+		.float-box div {
+			border: 1px dashed #000;
+			margin: 5px;
+			width: 200px;
+			float: left;
+		}
+		.float-box div:nth-child(1),
+		.float-box div:nth-child(2) {
+			height: 100px;
+		}
+
+		.float-box div:nth-child(3) {
+			height: 150px;
+		}
 	</style>
 </head>
 <body>
 	<!--环绕的图片及文字，图片的CSS类为 img-->
 	<div class="top">
-		<p><img src="http://www.zoneky.com/studio/games/7X7/7X7.png" alt="logo" class="img" border="0" />中国绿化建设网依托园林绿化企业的深厚资源，集全面的行业信息、超强的垂直行业引擎、新型B2B交易系统、行业人才市场于一体，为园林绿化行业的企业提供商业全面、交易安全、资讯快速、服务专业的全方位服务，切实满足企业的各项需求。</p>
+		<img src="http://www.zoneky.com/studio/games/7X7/7X7.png" alt="logo" class="img" border="0" /><p>中国绿化建设网依托园林绿化企业的深厚资源，集全面的行业信息、超强的垂直行业引擎、新型B2B交易系统、行业人才市场于一体，为园林绿化行业的企业提供商业全面、交易安全、资讯快速、服务专业的全方位服务，切实满足企业的各项需求。</p>
 		
 		<p>中国绿化建设网依托园林绿化企业的深厚资源，集全面的行业信息、超强的垂直行业引擎、新型B2B交易系统、行业人才市场于一体，为园林绿化行业的企业提供商业全面、交易安全、资讯快速、服务专业的全方位服务，切实满足企业的各项需求。</p>
 	</div>
+	<div class="float-box">
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</div>
+	div>div.it$em$*5
 </body>
 </html>
