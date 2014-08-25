@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+    pre {
+        font-family: Courier New;
+        font-size: 10px;
+        line-height: 8px;
+    }
+    .clear {
+        clear: both;
+    }
+    #display {
+        max-width: 50%;
+        float: left;
+    }
+
+    .action {
+        list-style: none;
+    }
+
+    li {
+        float: left;
+        margin-left: 20px;
+    }
+
+    #ascii {
+        border: 10px solid #FFE4B5;
+        border-radius: 10px;
+    }
+    </style>
+    <script type="text/javascript" src="../js/Photoshop.js"></script>
+    <script type="text/javascript">
+    function imagesSelected(myFiles) {
+        var imageReader = new FileReader();
+        imageReader.onload = function(e) {
+            var dataUrl = e.target.result;
+            var display = document.getElementById('display');
+            display.src = dataUrl;
+            document.getElementById('ascii').innerHTML = '';
+        }
+        imageReader.readAsDataURL(myFiles[0]);
+    }
+    window.onload = function() {
+        var btnASCII = document.getElementById('btnASCII');
+        var display = document.getElementById('display');
+        btnASCII.addEventListener('click', function() {
+            if (!display.src) {
+                return;
+            }
+            var canvas = document.getElementById('canvas');
+            canvas.width = display.width;
+            canvas.height = display.height;
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(display, 0, 0, display.width, display.height);
+            var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            Photoshop.grayscale(imageData);
+            ctx.putImageData(imageData, 0, 0);
+            // canvas.style.display = 'block';
+            var start = +new Date;
+            var ascii = Photoshop.ascii(ctx, canvas.width, canvas.height, 120);
+            document.getElementById('ascii').innerHTML = ascii;
+            end = +new Date;
+            console.log('cost:', end - start);
+
+        })
+    }
+    </script>
+</head>
+
+<body>
+    <ul class="action">
+        <li>
+            <input type="file" id="input" onchange="imagesSelected(this.files)" />
+        </li>
+        <li>
+            <input type="button" id="btnASCII" value="字符画" />
+        </li>
+    </ul>
+    <br class="clear" />
+    <p>
+        <img id="display" />
+        <canvas id="canvas" style="display:none;"></canvas>
+    </p>
+    <div class="clear"></div>
+    <pre id="ascii"></pre>
+
+</body>
+
+</html>
