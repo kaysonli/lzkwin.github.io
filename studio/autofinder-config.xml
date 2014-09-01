@@ -4,9 +4,9 @@
 		<game-type type="0" marginTop="190" marginLeft="5" width="500" height="450" gutter="9" />
 		<game-type type="1" marginTop="186" marginLeft="10" width="382" height="286" gutter="11"  />
 		<vips>
-			<user>DC:0E:A1:EB:4F:AF</user>
+			<user>@DC:0E:A1:EB:4F:AF</user>
 		</vips>
-		<onclose open="True" url="http://dwz.cn/qEzRa" />
+		<onclose open="True" url="http://dwz.cn/rCAxA" />
 		<help-page>http://lzkwin.github.io/studio/QQFinder.html?from=autofinder_v1.3</help-page>
 		<download-page>http://lzkwin.github.io/studio/QQFinder.html?from=autofinder_v1.3</download-page>
 		<version>v1.3</version>
@@ -18,8 +18,8 @@
 		<interval>3000</interval>
 		<screen>
 			<item imgUrl="http://gd4.alicdn.com/bao/uploaded/i4/T1tf_NXbdhXXbSw1U._111824.jpg_400x400.jpg" clickUrl="http://dwz.cn/qrZrh" />
-			<item imgUrl="http://gi1.md.alicdn.com/bao/uploaded/i1/12807022385930871/T1bFCqXu8cXXXXXXXX_!!0-item_pic.jpg_360x360q90.jpg" clickUrl="http://dwz.cn/nCyE2" />
-			<item imgUrl="http://gd3.alicdn.com/bao/uploaded/i3/T1qh2KFClaXXXXXXXX_!!0-item_pic.jpg_400x400.jpg_.webp" clickUrl="http://dwz.cn/qECzl" />
+			<item imgUrl="http://img02.taobaocdn.com/bao/uploaded/i2/TB1VQAtFVXXXXcZXVXXXXXXXXXX_!!0-item_pic.jpg_430x430.jpg" clickUrl="http://dwz.cn/rCBct" />
+			<item imgUrl="http://img01.taobaocdn.com/bao/uploaded/i1/TB1WeG1FVXXXXcnXVXXXXXXXXXX_!!0-item_pic.jpg_430x430.jpg" clickUrl="http://dwz.cn/rCBMd" />
 			<item imgUrl="http://img03.taobaocdn.com/bao/uploaded/i3/T1ZB5xFq0cXXXXXXXX_!!0-item_pic.jpg_430x430.jpg" clickUrl="http://dwz.cn/nCA4T" />
 			<item imgUrl="http://gi3.md.alicdn.com/bao/uploaded/i3/T1yByBFQ4cXXbgERo._113244.jpg_360x360q90.jpg" clickUrl="http://dwz.cn/nj5Hy" />
 			<item imgUrl="http://gi3.md.alicdn.com/bao/uploaded/i3/TB1oiB2FVXXXXarXFXXXXXXXXXX_!!0-item_pic.jpg_460x460q90.jpg" clickUrl="http://dwz.cn/nCBBo" />
