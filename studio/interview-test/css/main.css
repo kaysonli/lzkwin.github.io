@@ -42,10 +42,6 @@ ul, ol {
 	position: relative;
 }
 
-a:hover {
-	zoom:1
-}
-
 .banner-img {
 	position: absolute;
 	left: 0;
@@ -96,6 +92,8 @@ a:hover {
 }
 
 .slider-nav li {
+	display: block;
+	overflow: hidden;
 	width: 10px;
 	height: 10px;
 	float: left;
@@ -228,6 +226,10 @@ li.on {
 
 .recomend {
 	margin-left: 210px;
+	*margin-left: 10px;
+	position: relative;
+	*width: 370px;
+	*float: left;
 }
 
 .recomend .item {
@@ -259,10 +261,14 @@ li.on {
 	margin-bottom: 25px;
 	padding-bottom: 10px;
 	position: relative;
+	overflow: hidden;
 }
 
 .recomend .nav {
 	position: absolute;
+	overflow: hidden;
+	height: 8px;
+	zoom: 1;
 	right: 10px;
 	bottom: 10px;
 }
@@ -270,6 +276,7 @@ li.on {
 .recomend .nav li {
 	width: 8px;
 	height: 8px;
+	overflow: hidden;
 	float: left;
 	margin-right: 6px;
 	background-color: #ccc;
@@ -286,7 +293,6 @@ li.on {
 	color: #000;
 	font-size: 14px;
 }
-
 
 @media(max-width:1210px){
     .container{
