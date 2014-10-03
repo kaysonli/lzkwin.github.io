@@ -12,6 +12,7 @@ body{
 
 img {
 	border: none;
+	width: 100%;
 }
 
 .clear:after {
@@ -34,6 +35,10 @@ ul, ol {
 	height: 305px;
 	overflow: hidden;
 	position: relative;
+}
+
+a:hover {
+	zoom:1
 }
 
 .banner-img {
@@ -101,6 +106,8 @@ li.on {
 	padding: 20px 0 15px 0;
 	margin-bottom: 30px;
 	margin-top: 10px;
+	overflow: auto;
+	zoom: 1;
 }
 
 .promise h3 {
@@ -108,7 +115,7 @@ li.on {
 }
 
 .promise p {
-	font-size: 13px;
+	font-size: 12px;
 	margin-top: 5px;
 	font-family: 微软雅黑;
 }
@@ -128,13 +135,13 @@ li.on {
 	border-right-width: 0;
 }
 
-li > span, li > div {
-	display: inline-block;
+.promise li > span {
+	float: left;
+	display: block;
 }
 
-li > div {
-	position: relative;
-	top: -5px;
+.promise li > div {
+	margin-left: 65px;
 }
 
 .fancy, .good, .prev, .next, .mail, .quality {
@@ -224,10 +231,14 @@ li > div {
 	position: relative;
 }
 
+.imgbox {
+	position: relative;
+}
+
 .price {
 	position: absolute;
 	right: 0px;
-	bottom: 50px;
+	bottom: 10px;
 	width: 80px;
 	height: 30px;
 	display: block;
@@ -263,6 +274,12 @@ li > div {
 	padding: 20px 0 20px 0;
 }
 
+.desc a {
+	text-decoration: none;
+	color: #000;
+	font-size: 14px;
+}
+
 
 @media(max-width:1210px){
     .container{
@@ -273,6 +290,15 @@ li > div {
     }
 
     .promise ul li {
-    	width: 229px;
+    	width: 236px;
+    	padding-left: 10px;
+    }
+
+    .promise li > div {
+    	margin-left: 50px;
+    }
+
+    .recomend .item {
+    	width: 115px;
     }
 }
