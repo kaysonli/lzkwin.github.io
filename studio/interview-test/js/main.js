@@ -6,9 +6,14 @@
 	function initSlider() {
 		var sliderImages = ['images/banner.png', 'images/banner.png', 'images/banner.png', 'images/banner.png'];
 		var slider = new Slider(sliderImages);
-		setInterval(function() {
-			slider.move('right');
-		}, 2000);
+		// setInterval(function() {
+		// 	slider.move('right');
+		// }, 2000);
+		// $(".banner").mouseenter(function(){
+		// 	$(".slider-btn").show();
+		// }).mouseout(function(){
+		// 	$(".slider-btn").hide();
+		// });
 		$(".slider-btn").click(function() {
 			var direction = $(this).hasClass('prev') ? 'left' : 'right';
 			slider.move(direction);

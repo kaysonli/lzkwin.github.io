@@ -32,6 +32,7 @@ ul, ol {
 .banner {
 	width: 100%;
 	height: 305px;
+	overflow: hidden;
 	position: relative;
 }
 
@@ -48,12 +49,21 @@ ul, ol {
 }
 
 .slider-btn.prev {
-	left: 6px;
+	left: -36px;
 }
 
 .slider-btn.next {
-	right: 22px;
+	right: -36px;
 }
+
+.banner:hover .slider-btn.prev {
+	left: 6px;
+}
+
+.banner:hover .slider-btn.next {
+	right: 6px;
+}
+
 
 .banner .qrcode {
 	width: 102px;
@@ -133,10 +143,11 @@ li > div {
 
 .fancy { background-position:  0px 0px; height: 43px; width: 43px; }
 .good { background-position:  0px -43px; height: 43px; width: 43px; }
-.prev { background-position:  0px -86px; height: 35px; width: 40px; }
-.mail { background-position:  0px -121px; height: 43px; width: 43px; }
-.next { background-position:  0px -164px; height: 35px; width: 33px; }
-.quality { background-position:  0px -199px; height: 43px; width: 43px; }
+.mail { background-position:  0px -86px; height: 43px; width: 43px; }
+.next { background-position:  0px -129px; height: 41px; width: 36px; }
+.prev { background-position:  0px -170px; height: 41px; width: 36px; }
+.quality { background-position:  0px -211px; height: 43px; width: 43px; }
+
 
 .left {
 	float: left;
@@ -259,5 +270,9 @@ li > div {
     }
     .category {
     	width: 480px;
+    }
+
+    .promise ul li {
+    	width: 229px;
     }
 }
