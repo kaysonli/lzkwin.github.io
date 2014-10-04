@@ -6,14 +6,16 @@
 	function initSlider() {
 		var sliderImages = ['images/banner.png', 'images/banner.png', 'images/banner.png', 'images/banner.png'];
 		var slider = new Slider(sliderImages);
-		// setInterval(function() {
-		// 	slider.move('right');
-		// }, 2000);
-		// $(".banner").mouseenter(function(){
-		// 	$(".slider-btn").show();
-		// }).mouseout(function(){
-		// 	$(".slider-btn").hide();
-		// });
+		setInterval(function() {
+			slider.move('right');
+		}, 2000);
+		$(".banner").mouseover(function(){
+			$(".slider-btn.prev").css('left', '6px');
+			$(".slider-btn.next").css('right', '6px');
+		}).mouseout(function(){
+			$(".slider-btn.prev").css('left', '-36px');
+			$(".slider-btn.next").css('right', '-36px');
+		});
 		$(".slider-btn").click(function() {
 			var direction = $(this).hasClass('prev') ? 'left' : 'right';
 			slider.move(direction);
