@@ -1,6 +1,12 @@
 (function() {
 	$(function() {
 		initSlider();
+		lazyLoad();
+			
+		$(window).scroll(function(){
+			lazyLoad();
+		});
+
 	});
 
 	function initSlider() {
@@ -19,6 +25,20 @@
 		$(".slider-btn").click(function() {
 			var direction = $(this).hasClass('prev') ? 'left' : 'right';
 			slider.move(direction);
+		});
+	}
+
+	function lazyLoad() {
+		$(".category").each(function(index, item){
+			var rect = item.getBoundingClientRect();
+			var winHeight = $(window).height();
+			if(rect.top < winHeight && $(item).attr('loaded') != 1) {
+				console.log('lazy load: ', index);
+				$(item).find('img').each(function(idx, img) {
+					$(img).attr('src', $(img).attr('img-src'));
+				});
+				$(item).attr('loaded', 1);
+			}
 		});
 	}
 

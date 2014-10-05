@@ -54,8 +54,12 @@ ul, ol {
 	position: absolute;
 	top: 50%;
 	margin-top: -20px;
-	background-color: rgba(0,0,0,0.2);
-	_filter:progid: DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='scale', src="/images/sprite.png");
+	/*background-color: rgba(0,0,0,0.2);*/
+	background-color: #000;
+	opacity: 0.2;
+	filter: alpha(opacity=20);
+	_background-image: none;
+	/*_filter:progid: DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='scale', src="/images/sprite.png");*/
 }
 
 .slider-btn.prev {
