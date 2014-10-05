@@ -33,7 +33,6 @@
 			var rect = item.getBoundingClientRect();
 			var winHeight = $(window).height();
 			if(rect.top < winHeight && $(item).attr('loaded') != 1) {
-				console.log('lazy load: ', index);
 				$(item).find('img').each(function(idx, img) {
 					$(img).attr('src', $(img).attr('img-src'));
 				});
