@@ -303,6 +303,11 @@ li.on {
 	font-size: 14px;
 }
 
+.desc a:hover {
+	color: red;
+	text-decoration: underline;
+}
+
 @media(max-width:1210px){
     .container{
         width:990px
