@@ -54,12 +54,8 @@ ul, ol {
 	position: absolute;
 	top: 50%;
 	margin-top: -20px;
-	/*background-color: rgba(0,0,0,0.2);*/
-	background-color: #000;
-	opacity: 0.2;
-	filter: alpha(opacity=20);
-	_background-image: none;
-	/*_filter:progid: DXImageTransform.Microsoft.AlphaImageLoader(enabled='true', sizingMethod='scale', src="/images/sprite.png");*/
+	background-color:rgba(0, 0, 0, 0.2);
+    filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr="#33000000",EndColorStr="#33000000");
 }
 
 .slider-btn.prev {
@@ -265,8 +261,9 @@ li.on {
 	height: 30px;
 	display: block;
 	line-height: 30px;
-	background-color: #fff;
-	opacity: 0.5;
+	color: #000;
+	background-color: rgba(255,255,255,0.8);
+	filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr="#ccffffff",EndColorStr="#ccffffff");
 }
 
 .recomend .title-box {
