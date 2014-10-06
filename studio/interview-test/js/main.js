@@ -2,9 +2,15 @@
 	$(function() {
 		initSlider();
 		lazyLoad();
-			
-		$(window).scroll(function(){
+
+		$(window).scroll(function() {
 			lazyLoad();
+			var scrollTop = $(window).scrollTop();
+			if(scrollTop > 100) {
+				$('.back-top').show();
+			} else {
+				$('.back-top').hide();
+			}
 		});
 
 	});
@@ -13,16 +19,21 @@
 	function initSlider() {
 		var sliderImages = ['images/banner.png', 'images/banner.png', 'images/banner.png', 'images/banner.png'];
 		var slider = new Slider(sliderImages);
-		setInterval(function() {
+		var timer = setInterval(function() {
 			slider.move('right');
 		}, 2000);
 
-		$(".banner").mouseover(function(){
+		$(".banner").mouseover(function() {
 			$(".slider-btn.prev").addClass('show');
 			$(".slider-btn.next").addClass('show');
-		}).mouseout(function(){
+			//当光标位于banner区域时，停止自动播放
+			clearInterval(timer);
+		}).mouseout(function() {
 			$(".slider-btn.prev").removeClass('show');
 			$(".slider-btn.next").removeClass('show');
+			timer = setInterval(function() {
+				slider.move('right');
+			}, 2000);
 		});
 
 		$(".slider-btn").click(function() {
@@ -33,10 +44,10 @@
 
 	//图片延迟加载
 	function lazyLoad() {
-		$(".category").each(function(index, item){
+		$(".category").each(function(index, item) {
 			var rect = item.getBoundingClientRect();
 			var winHeight = $(window).height();
-			if(rect.top < winHeight && $(item).attr('loaded') != 1) {
+			if (rect.top < winHeight && $(item).attr('loaded') != 1) {
 				$(item).find('img').each(function(idx, img) {
 					$(img).attr('src', $(img).attr('img-src'));
 				});

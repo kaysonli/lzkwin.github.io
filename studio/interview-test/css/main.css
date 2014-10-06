@@ -8,6 +8,7 @@ body{
     min-width: 1002px;
     background-color: #f4f4f4;
     font-family: 微软雅黑;
+    position: relative;
 }
 
 img {
@@ -162,7 +163,7 @@ li.on {
 	margin-left: 55px;
 }
 
-.fancy, .good, .prev, .next, .mail, .quality {
+.fancy, .good, .prev, .next, .mail, .quality, .top {
 	background-image: url(../images/sprite.png);
 }
 
@@ -172,7 +173,31 @@ li.on {
 .next { background-position:  0px -129px; height: 41px; width: 36px; }
 .prev { background-position:  0px -170px; height: 41px; width: 36px; }
 .quality { background-position:  0px -211px; height: 43px; width: 43px; }
+.top { background-position:  0px -254px; height: 36px; width: 41px; display: block; margin: 0 auto;}
 
+.back-top {
+	position: fixed;
+	display: block;
+	width: 70px;
+	height: 60px;
+	right: 20px;
+	bottom: 20px;
+	border: 1px solid #ccc;
+	text-decoration: none;
+	text-align: center;
+	background-color: #44B66F;
+	color: #000;
+	display: none;
+}
+
+/* IE6 固定定位 */
+*html .back-top {
+	background-color: #F0F0F0;
+ 	position: absolute;
+ 	right: auto;
+ 	top: expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));
+ 	left: expression(eval(document.documentElement.scrollLeft+document.documentElement.clientWidth-this.offsetWidth)-(parseInt(this.currentStyle.marginLeft,10)||0)-(parseInt(this.currentStyle.marginRight,10)||0));
+}
 
 .left {
 	float: left;
