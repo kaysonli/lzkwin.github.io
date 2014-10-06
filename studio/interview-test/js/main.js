@@ -9,12 +9,14 @@
 
 	});
 
+	//初始化banner图片轮播组件
 	function initSlider() {
 		var sliderImages = ['images/banner.png', 'images/banner.png', 'images/banner.png', 'images/banner.png'];
 		var slider = new Slider(sliderImages);
 		setInterval(function() {
 			slider.move('right');
 		}, 2000);
+
 		$(".banner").mouseover(function(){
 			$(".slider-btn.prev").css('left', '6px');
 			$(".slider-btn.next").css('right', '6px');
@@ -22,12 +24,14 @@
 			$(".slider-btn.prev").css('left', '-36px');
 			$(".slider-btn.next").css('right', '-36px');
 		});
+		
 		$(".slider-btn").click(function() {
 			var direction = $(this).hasClass('prev') ? 'left' : 'right';
 			slider.move(direction);
 		});
 	}
 
+	//图片延迟加载
 	function lazyLoad() {
 		$(".category").each(function(index, item){
 			var rect = item.getBoundingClientRect();
@@ -41,6 +45,8 @@
 		});
 	}
 
+
+	//图片轮播
 	function Slider(imagesArray) {
 		this.imagesArray = imagesArray;
 		this.current = 0;
