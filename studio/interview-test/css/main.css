@@ -56,6 +56,9 @@ ul, ol {
 	margin-top: -20px;
 	background-color:rgba(0, 0, 0, 0.2);
     filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr="#33000000",EndColorStr="#33000000");
+    transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+	-webkit-transition: all 300ms ease-in-out;
 }
 
 .slider-btn.prev {
@@ -64,6 +67,14 @@ ul, ol {
 
 .slider-btn.next {
 	right: -36px;
+}
+
+.slider-btn.prev.show {
+	left: 6px;
+}
+
+.slider-btn.next.show {
+	right: 6px;
 }
 
 .banner:hover .slider-btn.prev {
@@ -266,6 +277,10 @@ li.on {
 	text-decoration: none;
 	background-color: rgba(255,255,255,0.8);
 	filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr="#ccffffff",EndColorStr="#ccffffff");
+}
+
+.price:hover {
+	color: #f00;
 }
 
 .recomend .title-box {
