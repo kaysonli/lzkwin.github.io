@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>display: inline-block</title>
+	<style type="text/css">
+		
+		.menu {
+			height: 50px;
+			list-style: none;
+			margin-bottom: 10px;
+		}
+		ul {
+			margin: 0;
+			padding: 0;
+		}
+		.menu li,
+		.menu span {
+			display: inline-block;
+			background-color: #0ff;
+			margin: 0 10px;
+			width: 150px;
+			height: 100%;
+			text-align: center;
+		}
+
+		ul.menu li {
+			/*display: inline-block;*/
+			/*zoom: 1;*/
+			*display: inline;
+		}
+	</style>
+</head>
+<body>
+	<ul class="menu">
+		<li>菜单1</li>
+		<li>菜单2</li>
+		<li>菜单3</li>
+		<li>菜单4</li>
+	</ul>
+	<div class="menu">
+		<span>菜单1</span>
+		<span>菜单2</span>
+		<span>菜单3</span>
+		<span>菜单4</span>
+	</div>
+</body>
+</html>
