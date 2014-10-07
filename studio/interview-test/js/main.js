@@ -1,3 +1,7 @@
+/*
+* 还原设计稿页面脚本
+* @李中凯 2014-10-6
+*/
 (function() {
 	$(function() {
 		initSlider();
@@ -6,14 +10,34 @@
 		$(window).scroll(function() {
 			lazyLoad();
 			var scrollTop = $(window).scrollTop();
-			if(scrollTop > 100) {
+			if (scrollTop > 100) {
 				$('.back-top').show();
 			} else {
 				$('.back-top').hide();
 			}
+			var isBottom = reachBottom();
+			if(isBottom) {
+				appendContent();
+			}
 		});
 
 	});
+
+	//判断页面滚动条是否到达底部
+	function reachBottom() {
+		var scrollTop = $(window).scrollTop();
+		var scrollHeight = $(document).height();
+		var windowHeight = $(window).height();
+		return scrollTop + windowHeight == scrollHeight;
+	}
+
+	//模拟无限下拉加载内容
+	function appendContent() {
+		var tpl = '<div class="category clear"><div class="left"><div class="pavilion beauty"><div class="content"><div class="name">美妆馆</div><div class="name-en"><h1>BEAUTY</h1><h1>MAKEUP</h1><h6>PAVILION</h6></div></div></div><div class="popular"><h3 class="title">明星店铺</h3><div class="logo"><a href="#"><img src="images/shop1.gif"alt=""></a></div></div><div class="popular"><h3 class="title">热门品牌</h3><div class="logo"><a href="#"><img src="images/brand1.gif"alt=""></a></div></div></div><div class="recomend"><div class="title-box"><h3 class="title">推荐商品</h3><ul class="nav"><li></li><li></li><li></li></ul></div><div class="item-container clear"><div class="item"><div class="imgbox"><a href="#"target="_blank"><img src="images/1-1.gif"alt=""img-src="images/1-1.gif"><span class="price">￥150.00</span></a></div><p class="desc"><a href="#"target="_blank">[资生堂]安热沙安耐晒沙安耐露/霜60ML</a></p></div><div class="item"><div class="imgbox"><a href="#"target="_blank"><img src="images/1-2.gif"alt=""img-src="images/1-2.gif"><span class="price">￥150.00</span></a></div><p class="desc"><a href="#"target="_blank">[资生堂]安热沙安耐晒沙安耐露/霜60ML</a></p></div><div class="item"><div class="imgbox"><a href="#"target="_blank"><img src="images/1-3.gif"alt=""img-src="images/1-3.gif"><span class="price">￥150.00</span></a></div><p class="desc"><a href="#"target="_blank">[资生堂]安热沙安耐晒沙安耐露/霜60ML</a></p></div><div class="item"><div class="imgbox"><a href="#"target="_blank"><img src="images/1-4.gif"alt=""img-src="images/1-4.gif"><span class="price">￥150.00</span></a></div><p class="desc"><a href="#"target="_blank">[资生堂]安热沙安耐晒沙安耐露/霜60ML</a></p></div></div></div></div>';
+		var tpl2 = '<div class="category clear col2"><div class="left"><div class="pavilion parent-children"><div class="content"><div class="name">亲子馆</div><div class="name-en"><h1>PARENTS</h1><h1>CHILDREN</h1><h6>PAVILION</h6></div></div></div><div class="popular"><h3 class="title">明星店铺</h3><div class="logo"><a href="#"><img src="images/shop2.gif"alt=""></a></div></div><div class="popular"><h3 class="title">热门品牌</h3><div class="logo"><a href="#"><img src="images/brand2.gif"alt=""></a></div></div></div><div class="recomend"><div class="title-box"><h3 class="title">推荐商品</h3><ul class="nav"><li></li><li></li><li></li></ul></div><div class="item-container clear"><div class="item"><div class="imgbox"><a href="#"target="_blank"><img src="images/2-1.gif"alt=""img-src="images/2-1.gif"><span class="price">￥150.00</span></a></div><p class="desc"><a href="#"target="_blank">[资生堂]安热沙安耐晒沙安耐露/霜60ML</a></p></div><div class="item"><div class="imgbox"><a href="#"target="_blank"><img src="images/2-2.gif"alt=""img-src="images/2-2.gif"><span class="price">￥150.00</span></a></div><p class="desc"><a href="#"target="_blank">[资生堂]安热沙安耐晒沙安耐露/霜60ML</a></p></div><div class="item"><div class="imgbox"><a href="#"target="_blank"><img src="images/2-3.gif"alt=""img-src="images/2-3.gif"><span class="price">￥150.00</span></a></div><p class="desc"><a href="#"target="_blank">[资生堂]安热沙安耐晒沙安耐露/霜60ML</a></p></div><div class="item"><div class="imgbox"><a href="#"target="_blank"><img src="images/2-4.gif"alt=""img-src="images/2-4.gif"><span class="price">￥150.00</span></a></div><p class="desc"><a href="#"target="_blank">[资生堂]安热沙安耐晒沙安耐露/霜60ML</a></p></div></div></div></div>';
+		$(".container").append($(tpl));
+		$(".container").append($(tpl2));
+	}
 
 	//初始化banner图片轮播组件
 	function initSlider() {
