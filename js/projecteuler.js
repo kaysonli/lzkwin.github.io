@@ -1,24 +1,27 @@
 function fullPermutation(list) {
 	var full = permutate(list);
 	console.log(full, 'total:', full.length);
-	function permutate(arr) {
-		if (arr.length == 1) {
-			return [arr];
-		}
-		var full = [];
-		for (var i = 0; i < arr.length; i++) {
-			var copy = arr.slice(0);
-			var tmp = copy[0];
-			copy[0] = copy[i];
-			copy[i] = tmp;
-			var childPerm = permutate(copy.slice(1));
-			for (var j = 0; j < childPerm.length; j++) {
-				childPerm[j].unshift(copy[0]);
-				full.push(childPerm[j]);
-			}
-		}
-		return full;
+
+
+}
+
+function permutate(arr) {
+	if (arr.length == 1) {
+		return [arr.join('')];
 	}
+	var full = [];
+	for (var i = 0; i < arr.length; i++) {
+		var copy = arr.slice(0);
+		var tmp = copy[0];
+		copy[0] = copy[i];
+		copy[i] = tmp;
+		var childPerm = permutate(copy.slice(1));
+		for (var j = 0; j < childPerm.length; j++) {
+			// childPerm[j].unshift(copy[0]);
+			full.push(copy[0] + '' + childPerm[j]);
+		}
+	}
+	return full;
 }
 
 function prime(n) {
@@ -152,13 +155,19 @@ function problem13() {
 }
 
 function problem41() {
-	var num = 1023456789;
-	var arr = num.toString().split('');
-	while (true) {
-		if (prime(num) && num.toString().split('').sort() === '0123456789') {
-			break;
+	var digits = ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
+		max = -1;
+	while (digits.length) {
+		var full = permutate(digits);
+		for (var i = 0, ln = full.length; i < ln; i++) {
+			var item = full[i];
+			if (item.charAt(item.length-1) % 2 === 1 && prime(item)) {
+				if (item > max) {
+					max = item;
+				}
+			}
 		}
-		++num;
+		digits.pop();
 	}
-	console.log(num);
+	console.log(max);//7652413
 }
