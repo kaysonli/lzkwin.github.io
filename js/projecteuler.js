@@ -1,4 +1,30 @@
+function fullPermutation(list) {
+	var full = permutate(list);
+	console.log(full, 'total:', full.length);
+	function permutate(arr) {
+		if (arr.length == 1) {
+			return [arr];
+		}
+		var full = [];
+		for (var i = 0; i < arr.length; i++) {
+			var copy = arr.slice(0);
+			var tmp = copy[0];
+			copy[0] = copy[i];
+			copy[i] = tmp;
+			var childPerm = permutate(copy.slice(1));
+			for (var j = 0; j < childPerm.length; j++) {
+				childPerm[j].unshift(copy[0]);
+				full.push(childPerm[j]);
+			}
+		}
+		return full;
+	}
+}
+
 function prime(n) {
+	if (n < 2) {
+		return false;
+	}
 	for (var i = 2; i <= Math.sqrt(n); i++) {
 		if (n % i === 0) {
 			return false;
@@ -10,20 +36,39 @@ function prime(n) {
 function getPrimeFactors(number) {
 	var list = [],
 		factor = 2;
+	if (prime(number)) {
+		return [number];
+	}
 	while (!prime(number)) {
-		factor = 2;
-		while (!prime(factor)) {
-			++factor;
-		}
 		while (number % factor === 0) {
 			list.push(factor);
 			number /= factor;
 		}
-		if(prime(number)) {
+		if (prime(number)) {
 			list.push(number);
+			break;
+		}
+		if (number === 1) {
+			break;
+		}
+		++factor;
+		while (!prime(factor)) {
+			++factor;
 		}
 	}
 	return list;
+}
+
+function getGCD(a, b) {
+	var factorsA = getPrimeFactors(a),
+		factorsB = getPrimeFactors(b),
+		gcd = 1;
+	for (var i = 0; i < factorsA.length; i++) {
+		if (factorsB.indexOf(factorsA[i]) > -1) {
+			gcd *= factorsA[i];
+		}
+	}
+	return gcd;
 }
 
 window.onload = function() {
@@ -32,7 +77,8 @@ window.onload = function() {
 }
 
 function problem3() {
-
+	var factors = getPrimeFactors(600851475143);
+	console.log(factors);
 }
 
 function problem5() {
@@ -67,6 +113,14 @@ function problem4() {
 	console.log(max);
 }
 
+function problem6() {
+	var sum = 0;
+	for (var i = 1; i <= 100; i++) {
+		sum += i * i;
+	}
+	console.log(5050 * 5050 - sum);
+}
+
 function problem7() {
 	var index = 0,
 		target = 2;
@@ -95,4 +149,16 @@ function problem13() {
 	}
 	digits.reverse();
 	console.log(carry + digits.join('').substr(0, 10 - carry.toString().length));
+}
+
+function problem41() {
+	var num = 1023456789;
+	var arr = num.toString().split('');
+	while (true) {
+		if (prime(num) && num.toString().split('').sort() === '0123456789') {
+			break;
+		}
+		++num;
+	}
+	console.log(num);
 }
