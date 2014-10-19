@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Context menu</title>
+	<script type="text/javascript">
+		window.onload = function() {
+			var dom = document.getElementById('menu');
+			var menu = new ContextMenu(dom, ['View', 'Refresh']);
+			bind(document, 'contextmenu', function(e) {
+				e = e || window.event;
+				var pos = {
+					x: e.pageX || e.offsetX,
+					y: e.pageY || e.offsetY
+				};
+				console.log(pos);
+				menu.show(pos);
+				if(e.preventDefault) {
+					e.preventDefault();
+				} else {
+					e.returnValue = false;
+				}
+			});
+
+			bind(document.body, 'click', function(e) {
+				menu.hide();
+			});
+		}
+
+		function ContextMenu(dom, menuItems) {
+			this.el = dom;
+			this.el.innerHTML = '';
+			var me = this;
+			for (var i = 0; i < menuItems.length; i++) {
+				var li = document.createElement('li');
+				li.innerHTML = menuItems[i];
+				this.el.appendChild(li);
+			};
+			bind(this.el, 'click', function(e) {
+				var e = e || window.event;
+				var target = e.target || e.srcElement;
+				if(target.nodeName === 'LI') {
+					alert(target.innerHTML);
+				}
+			});
+		}
+
+		ContextMenu.prototype.show = function(pos) {
+			this.el.style.display = 'block';
+			var rect = this.el.getBoundingClientRect(),
+				winRect = document.body.getBoundingClientRect();
+			var menuWidth = rect.width || (rect.right - rect.left);
+			var menuHeight = rect.height || (rect.bottom - rect.top);
+			var winWidth = winRect.width || (winRect.right - winRect.left);
+			var winHeight = winRect.height || (winRect.bottom - winRect.top);
+			if(menuWidth + pos.x > winWidth) {
+				pos.x -= menuWidth;
+			}
+			if(menuHeight + pos.y > winHeight) {
+				pos.y -= menuHeight;
+			}
+			this.el.style.left = pos.x + 'px';
+			this.el.style.top = pos.y + 'px';
+		}
+
+		ContextMenu.prototype.hide = function() {
+			this.el.style.display = 'none';
+		}
+
+		function bind(dom, event, handler) {
+			if(dom.attachEvent) {
+				dom.attachEvent('on' + event, function() {
+					handler(window.event);
+				});
+			} else if(dom.addEventListener) {
+				dom.addEventListener(event, handler);
+			}
+		}
+	</script>
+	<style type="text/css">
+		html, body {
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		ul {
+			background-color: #ccc;
+			padding: 0;
+			margin: 0;
+			width: 150px;
+			display: none;
+			position: absolute;
+		}
+
+		li {
+			padding: 5px 0;
+			list-style-type: none;
+			cursor: default;
+		}
+
+		#menu li:hover {
+			background-color: #aaa;
+		}
+	</style>
+</head>
+<body>
+	<ul id="menu"></ul>
+	<div tabindex="-1" class="zm-item-answer" data-aid="287006" data-atoken="12919726" data-collapsed="0" data-created="1310990386" data-deleted="0" data-isowner="0" data-helpful="1">
+<a class="zg-anchor-hidden" name="answer-287006"></a>
+
+<div class="zm-item-vote">
+<a name="expand" class="zm-item-vote-count" href="javascript:;" data-votecount="242">242</a>
+</div>
+
+<div class="zm-votebar">
+<button class="up pressed" aria-pressed="true" title="取消赞同">
+<i class="icon vote-arrow"></i>
+<span class="label">取消赞同</span>
+<span class="count">242</span>
+</button>
+<button class="down" aria-pressed="false" title="反对，不会显示你的姓名">
+<i class="icon vote-arrow"></i>
+<span class="label">反对，不会显示你的姓名</span>
+</button>
+</div>
+
+
+<div class="answer-head">
+
+<div class="zm-item-answer-author-info">
+<h3 class="zm-item-answer-author-wrap">
+
+
+<a data-tip="p$t$rysun" class="zm-item-link-avatar" href="/people/rysun">
+<img src="http://pic4.zhimg.com/84cb7a350_s.jpg" class="zm-list-avatar" data-source="http://pic4.zhimg.com/84cb7a350_s.jpg">
+</a>
+
+
+
+<a data-tip="p$t$rysun" href="/people/rysun">SUN Ruoyu</a>，<strong title="huaxing.com/geek" class="zu-question-my-bio"><a href="http://huaxing.com/geek" class=" external" target="_blank" rel="nofollow noreferrer"><span class="invisible">http://</span><span class="visible">huaxing.com/geek</span><span class="invisible"></span><i class="icon-external"></i></a></strong>
+
+</h3>
+<a href="javascript:;" name="collapse" class="collapse meta-item zg-right"><i class="z-icon-fold"></i>收起</a>
+</div>
+
+<div class="zm-item-vote-info " data-votecount="242">
+
+<span class="voters">
+<a data-tip="p$t$freedomcly" href="http://www.zhihu.com/people/freedomcly" class="zg-link" title="凌凌西">凌凌西</a>、<a data-tip="p$t$li-zhong-kai-46" href="http://www.zhihu.com/people/li-zhong-kai-46" class="zg-link" title="李中凯">李中凯</a>、<a data-tip="p$t$_Chener_" href="http://www.zhihu.com/people/_Chener_" class="zg-link" title="Chener">Chener</a>
+</span>
+
+
+<a href="javascript:;" class="more"> 等人赞同</a>
+
+
+</div>
+</div>
+<div class="zm-item-rich-text" data-resourceid="87981" data-action="/answer/content">
+
+<textarea class="content hidden"> 看了这个问题，我还是很有感慨的，多扯几句相关不相关的。先说明，我的Design背景主要是国外，英文为主，对国内的设计了解有限。&lt;br&gt;&lt;ol&gt;&lt;li&gt;我04年的时候开始学习前端，在那个时候，国外基本上转型到了HTML+CSS，而国内貌似HTML+CSS刚刚兴起(不熟，如果时间不准确请纠正)。所以我基本上没有做过Table-based design。这是个IE6的年代，所以IE6理所应当成为了事实标准。&lt;/li&gt;&lt;li&gt;经历过这个年代，我学到了两点，一点是正确的，一点是错误的。正确的是，HTML仅仅应该作为标记语言，而CSS应该完全控制布局设计，做到两点分开是很大的一个进步。错误的是，Javascript (当时流行DHTML) 是一个很简单的实现一些网页特效的脚本语言，这个错误的想法，让我一直没有重视Javascript。只是Copy &amp;amp; Paste一些代码然后改改就满意了。&lt;/li&gt;&lt;li&gt;设计也经过了Web 2.0风潮，当时最流行的趋势就是「大字体，鲜艳色，高光和倒影」，甚至许多人都是盲目去追求，导致Web 2.0的网站反而都千篇一律了。于是有一些前卫的人，把平面设计等许多模式引入的网页设计，他们建立了在Photoshop做精准Mock up，然后通过CSS来实现，也就是所谓的「切图」。&lt;/li&gt;&lt;li&gt;切图的实现，很大程度上让网页设计重新个性化起来。而且网页设计素来都是由两个门派的：一个是计算机出身的技术派，一个是传统设计出身的艺术派。后者本身对于PS非常了解，也有很好的美工功底，所以他们生产出许多非常令人「眼花缭乱」的设计，然后由前者去切图，实现。&lt;/li&gt;&lt;li&gt;切图发展到了极致，出现了Pixel perfect这个流派，正如名字一样，他们追求的是「像素完美」，即每一个像素都应该在PS设计稿中应该在的位置。可以想象，在那个浏览器Bug泛滥的年代，实现这个非常困难，所以也让CSS Hack非常流行。&lt;/li&gt;&lt;li&gt;切图的风行，还让定宽(Fixed width)设计流行起来。由于PS中没法实现Fluid Width的设计，而且追求像素完美的设计师们，不能忍受可能的变化和不确定，所以定宽基本上成为事实标准。&lt;/li&gt;&lt;li&gt;但是，Pixel perfect仍然有缺陷。首先就是忽略用户体验，出身平面设计的设计师，对于交互设计没有什么理解，导致最后的网页很漂亮，但是不好用；第二就是字体渲染，浏览器的字体渲染和PS有很大的不同，对于line-height和其他细节的控制不到位；第三就是分辨率，在分辨率多样化之后，定宽无法满足需求；第四就是网页缩放，一旦缩放网页，布局就会乱掉；第五就是混乱的浏览器，这个不用说，大家都明白。&lt;/li&gt;&lt;li&gt;而对于Pixel perfect的最大打击，就是移动终端的流行。iPhone，iPad，Android对于一个网站的流量贡献越来越大，无法忽略。传统的切图只为桌面电脑设计，在移动终端体验非常差。&lt;/li&gt;&lt;li&gt;在「切图」盛行的时候，还有一个流派，就是Minimalist(极简主义)，一直以来Minimalist被认为是很小众的，而且许多人认为极简主义很容易，只要把背景设置成白色就好了。其实这是错误的，极简主义放弃了花哨的图案和设计，把重心放到了浏览器的字体(渲染)，line-height，布局，留白，以及交互。Minimalist是一种态度：网页不必要看起来很漂亮，但一定要用起来很舒服。&lt;/li&gt;&lt;li&gt;切图现在的重要性已经远远下降了(至少是在国外)，PS只是用来做一个示意Mock up，不会再像以前那样要求Pixel perfect，而且Fireworks由于方便的管理布局，也开始被接受(曾经FW被PS压制，很少有人用)。关键是，设计的重点已经不再是图像，而是交互和体验，这个转型导致了Javascript的地位大大提升。向我这种被「误导」过的人，都要开始重新学习Javascript。&lt;/li&gt;&lt;li&gt;前卫的观点是，切图已经过时了，这是一个Responsive Web Design的年代。其实网页本身就是Responsive，而是因为切图和Pixel perfect的流行，导致这一点长时间被忽略，去年这个概念被重新挖掘出来。Responsive Web Design，也标志着网页设计再次向「体验」靠拢，而不仅仅是好看，花哨。&lt;/li&gt;&lt;li&gt;有一个笑话，说国内和国外的设计不同：当国外设计师在追逐Web 2.0风格的时候，国内设计师在奋战IE6；当国外设计师在研究Pixel Perfect的时候，国内设计师在奋战IE6；当国外设计师回归体验设计的时候，国内设计师在奋战IE6；当国外设计师研究Responsive Web Design的时候，国内设计师在奋战IE6。仅供大家一笑。&lt;/li&gt;&lt;/ol&gt;关于Responsive Web Design，看这里：&lt;a href="http://www.alistapart.com/articles/responsive-web-design/" class=" external" target="_blank" rel="nofollow noreferrer"&gt;&lt;span class="invisible"&gt;http://www.&lt;/span&gt;&lt;span class="visible"&gt;alistapart.com/articles&lt;/span&gt;&lt;span class="invisible"&gt;/responsive-web-design/&lt;/span&gt;&lt;span class="ellipsis"&gt;&lt;/span&gt;&lt;i class="icon-external"&gt;&lt;/i&gt;&lt;/a&gt;&lt;br&gt;关于最近讨论「切图过时」，看这里：&lt;a href="http://www.zurb.com/article/710/time-to-give-up-on-controlling-our-design" class=" external" target="_blank" rel="nofollow noreferrer"&gt;&lt;span class="invisible"&gt;http://www.&lt;/span&gt;&lt;span class="visible"&gt;zurb.com/article/710/ti&lt;/span&gt;&lt;span class="invisible"&gt;me-to-give-up-on-controlling-our-design&lt;/span&gt;&lt;span class="ellipsis"&gt;&lt;/span&gt;&lt;i class="icon-external"&gt;&lt;/i&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;以上仅仅是我个人的一些经验，希望和大家交流。 
+
+
+&lt;span class="answer-date-link-wrap"&gt;
+&lt;a class="answer-date-link last_updated meta-item" data-tip="s$t$发布于 2011-07-18" target="_blank" href="/question/19769761/answer/12919726"&gt;编辑于 2011-07-18&lt;/a&gt;
+&lt;/span&gt;
+
+</textarea>
+<div class="zh-summary summary clearfix">
+
+看了这个问题，我还是很有感慨的，多扯几句相关不相关的。先说明，我的Design背景主要是国外，英文为主，对国内的设计了解有限。我04年的时候开始学习前端，在那个时候，国外基本上转型到了HTML+CSS，而国内貌似HTML+CSS刚刚兴起(不熟，如果时间不准确请纠…
+
+<a href="/question/19769761/answer/12919726" class="toggle-expand">显示全部</a>
+
+</div>
+
+</div>
+<div class="zm-item-meta zm-item-comment-el answer-actions clearfix">
+<div class="zm-meta-panel">
+
+<a data-follow="q:link" class="follow-link zg-follow meta-item" href="javascript:;" id="sfb-87981"><i class="z-icon-follow"></i>关注问题</a>
+
+<a href="#" name="addcomment" class=" meta-item toggle-comment">
+<i class="z-icon-comment"></i>26 条评论</a>
+
+
+<a href="#" class="meta-item zu-autohide" name="thanks"><i class="z-icon-thank"></i>感谢</a>
+
+
+
+<a href="#" class="meta-item zu-autohide" name="share">
+<i class="z-icon-share"></i>分享</a>
+<a href="#" class="meta-item zu-autohide" name="favo">
+<i class="z-icon-collect"></i>收藏</a>
+
+
+
+
+<span class="zg-bull zu-autohide">•</span>
+
+<a href="#" name="nohelp" class="meta-item zu-autohide">没有帮助</a>
+
+<span class="zg-bull zu-autohide">•</span>
+<a href="#" name="report" class="meta-item zu-autohide">举报</a>
+
+
+
+
+<span class="copyright zu-autohide"></span>
+
+
+<a href="#" name="collapse" class="collapse meta-item zg-right"><i class="z-icon-fold"></i>收起</a>
+</div>
+
+</div>
+</div>
+</body>
+</html>
