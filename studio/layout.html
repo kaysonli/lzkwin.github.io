@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Layout</title>
+	<style type="text/css">
+		html, body, h1, h2, h3, h4, h5, h6 {
+			margin: 0;
+		}
+		.container {
+			width: 80%;
+			margin: 0 auto;
+			height: 400px;
+			overflow: hidden;
+		}
+		.left, .right {
+			width: 200px;
+			height: 100%;
+			background-color: #D2691E;
+		}
+
+		.left {
+			float: left;
+		}
+
+		.center {
+			height: 100%;
+			margin-left: 200px;
+			margin-right: 200px;
+			background-color: #ccc;
+		}
+
+		.right {
+			position: relative;
+			top: -100%;
+			float: right;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="left"></div>
+		<div class="center"><div id="main">
+					<h1>content</h1>
+					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Phasellus varius eleifend tellus. Suspendisse potenti. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Nulla facilisi. Sed wisi lectus, placerat nec, mollis quis, posuere eget, arcu.</p>
+					<p class="last">Donec euismod. Praesent mauris mi, adipiscing non, mollis eget, adipiscing ac, erat. Integer nonummy mauris sit amet metus. In adipiscing, ligula ultrices dictum vehicula, eros turpis lacinia libero, sed aliquet urna diam sed tellus. Etiam semper sapien eget metus.</p>
+				</div></div>
+		<div class="right"></div>
+	</div>
+</body>
+</html>
