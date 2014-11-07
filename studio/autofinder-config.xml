@@ -6,7 +6,7 @@
 		<vips>
 			<user>@DC:0E:A1:EB:4F:AF</user>
 		</vips>
-		<onclose open="True" url="http://ai.taobao.com?pid=mm_34221849_4518477_25210330" />
+		<onclose open="True" url="http://www.sokibuy.com/malls.html" />
 		<help-page>http://lzkwin.github.io/studio/QQFinder.html?from=autofinder_v1.3</help-page>
 		<download-page>http://lzkwin.github.io/studio/QQFinder.html?from=autofinder_v1.3</download-page>
 		<version>v1.3</version>
@@ -17,17 +17,17 @@
 		<title>购物推荐</title>
 		<interval>3000</interval>
 		<screen>
-			<item imgUrl="http://gd4.alicdn.com/bao/uploaded/i4/T1tf_NXbdhXXbSw1U._111824.jpg_400x400.jpg" clickUrl="http://dwz.cn/qrZrh" />
-			<item imgUrl="http://img02.taobaocdn.com/bao/uploaded/i2/TB1VQAtFVXXXXcZXVXXXXXXXXXX_!!0-item_pic.jpg_430x430.jpg" clickUrl="http://dwz.cn/rCBct" />
-			<item imgUrl="http://img01.taobaocdn.com/bao/uploaded/i1/TB1WeG1FVXXXXcnXVXXXXXXXXXX_!!0-item_pic.jpg_430x430.jpg" clickUrl="http://dwz.cn/rCBMd" />
-			<item imgUrl="http://img03.taobaocdn.com/bao/uploaded/i3/T1ZB5xFq0cXXXXXXXX_!!0-item_pic.jpg_430x430.jpg" clickUrl="http://dwz.cn/nCA4T" />
-			<item imgUrl="http://gi3.md.alicdn.com/bao/uploaded/i3/T1yByBFQ4cXXbgERo._113244.jpg_360x360q90.jpg" clickUrl="http://dwz.cn/nj5Hy" />
-			<item imgUrl="http://gi3.md.alicdn.com/bao/uploaded/i3/TB1oiB2FVXXXXarXFXXXXXXXXXX_!!0-item_pic.jpg_460x460q90.jpg" clickUrl="http://dwz.cn/nCBBo" />
+			<item imgUrl="http://gtms02.alicdn.com/tps/i2/TB1TybXGFXXXXcvXFXXluMv0pXX-440-180.jpeg" clickUrl="http://dwz.cn/vz9IV" />
+			<item imgUrl="http://gtms01.alicdn.com/tps/i1/TB1YN2OGFXXXXXfXXXXuPxD5VXX-440-180.png" clickUrl="http://dwz.cn/vz7CW" />
+			<item imgUrl="http://gtms03.alicdn.com/tps/i3/TB1YRPNGFXXXXa9XpXXQO4D5VXX-440-180.jpg" clickUrl="http://dwz.cn/vz9J5" />
+			<item imgUrl="http://img04.taobaocdn.com/imgextra/i4/1114511827/TB2e_KZaVXXXXcOXXXXXXXXXXXX_!!1114511827.jpg" clickUrl="http://dwz.cn/vz9Jt" />
+			<item imgUrl="http://gtms04.alicdn.com/tps/i4/TB1LVLxGFXXXXb6XVXXQO4D5VXX-440-180.jpg" clickUrl="http://dwz.cn/vz9JF" />
+			<item imgUrl="http://gtms03.alicdn.com/tps/i3/TB1YRPNGFXXXXa9XpXXQO4D5VXX-440-180.jpg" clickUrl="http://dwz.cn/vz9J5" />
 		</screen>
 		<statusbar>
-			<item text="拉链式耳机" clickUrl="http://redirect.simba.taobao.com/rd?w=unionnojs&amp;f=http%3A%2F%2Fai.taobao.com%2Fauction%2Fedetail.htm%3Fe%3DQvRshQA4GAojmraEDZVrLoT6bQbh57f%252BWIYUy9WxI16LltG5xFicOdXrTUTgh9sMDPIwxrc30rikl0dvZi7AGYNCr2UH%252B95i7soj0Gesb8Bu30%252F3YOl%252BD%252BIZWR1bMnHu%26unid%3D34221849%26ptype%3D100010%26from%3Dbasic&amp;k=5ccfdb950740ca16&amp;c=un&amp;b=alimm_0&amp;p=mm_34221849_4518477_14818311" />
-			<item text="太阳能移动电源" clickUrl="http://redirect.simba.taobao.com/rd?w=unionnojs&amp;f=http%3A%2F%2Fai.taobao.com%2Fauction%2Fedetail.htm%3Fe%3DEma4QUwJxMjghojqVNxKsYv3cgGvJ0K%252FwTF0nIgV33SLltG5xFicOdXrTUTgh9sMDPIwxrc30rikl0dvZi7AGYNCr2UH%252B95i7soj0Gesb8Bu30%252F3YOl%252BD%252BIZWR1bMnHu%26unid%3D34221849%26ptype%3D100010%26from%3Dbasic&amp;k=5ccfdb950740ca16&amp;c=un&amp;b=alimm_0&amp;p=mm_34221849_4518477_14818311" />
-			<item text="充话费" clickUrl="http://dwz.cn/nCATE" />
+			<item text="双11主会场" clickUrl="http://dwz.cn/vz9IV" />
+			<item text="双11天猫男装会场" clickUrl="http://dwz.cn/vz7CW" />
+			<item text="双11数码家电网购狂欢节绝世优惠仅此一天" clickUrl="http://dwz.cn/vz9J5" />
 		</statusbar>
 	</ads>
 </config>
