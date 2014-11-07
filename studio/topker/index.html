@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Topker tools</title>
+    <script>
+        var clickUrls = [];
+        function getClickUrl(promotionURL, eventId, title, imageUrl, promotionType) {
+            var url = 'http://pub.alimama.com/urltrans/urltransForOfficial.json?siteid=4518477&adzoneid=14818311&promotionURL={0}&eventId={1}&invokerId=7465410187&t=1415322680918&_tb_token_=H4KKpFo2Rpn&_input_charset=utf-8';
+            url = url.replace('{0}', encodeURIComponent(promotionURL)).replace('{1}', eventId);
+            $.ajax({
+                url: url,
+                // async: false,
+                type: 'GET'
+            }).done(function(result) {
+                clickUrls.push({
+                    title: title,
+                    image: imageUrl,
+                    clickUrl: result.data.sclick,
+                    type: promotionType
+                });
+            }).fail(function(result){
+                console.log(result);
+            });
+        }
+
+        function getSites() {
+            var rows = $("#J_act_table tr");
+            rows.each(function(index, item){
+                var $item = $(item);
+                var eventId = $item.attr('eventid'),
+                    imageUrl = $item.find('img').attr('src'),
+                    title = $item.find('li.title a').attr('title'),
+                    promotionURL = $item.find('li.title a').attr('href'),
+                    promotionType = $item.find('td:nth(1)').text();
+                getClickUrl(promotionURL, eventId, title, imageUrl, promotionType);
+            });
+        }
+
+        function getShortUrl(info) {
+            $.ajax({
+                url: 'http://dwz.cn/create.php',
+                type: 'POST',
+                dataType: 'JSON',
+                data: {
+                    access_type: 'web',
+                    url: info.clickUrl
+                }
+            }).done(function(result) {
+                info.tinyUrl = result.tinyurl;
+            });
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
