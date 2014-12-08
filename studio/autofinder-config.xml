@@ -6,7 +6,7 @@
 		<vips>
 			<user>@DC:0E:A1:EB:4F:AF</user>
 		</vips>
-		<onclose open="True" url="http://www.sokibuy.com/malls.html" />
+		<onclose open="True" url="http://www.sokibuy.com/1212.html" />
 		<help-page>http://lzkwin.github.io/studio/QQFinder.html?from=autofinder_v1.3</help-page>
 		<download-page>http://lzkwin.github.io/studio/QQFinder.html?from=autofinder_v1.3</download-page>
 		<version>v1.3</version>
@@ -17,17 +17,17 @@
 		<title>购物推荐</title>
 		<interval>3000</interval>
 		<screen>
-			<item imgUrl="http://gtms02.alicdn.com/tps/i2/TB1TybXGFXXXXcvXFXXluMv0pXX-440-180.jpeg" clickUrl="http://dwz.cn/vz9IV" />
-			<item imgUrl="http://gtms01.alicdn.com/tps/i1/TB1YN2OGFXXXXXfXXXXuPxD5VXX-440-180.png" clickUrl="http://dwz.cn/vz7CW" />
-			<item imgUrl="http://gtms03.alicdn.com/tps/i3/TB1YRPNGFXXXXa9XpXXQO4D5VXX-440-180.jpg" clickUrl="http://dwz.cn/vz9J5" />
+			<item imgUrl="http://gtms04.alicdn.com/tps/i4/TB1O3DsGFXXXXaFaXXXQO4D5VXX-440-180.jpg" clickUrl="http://dwz.cn/wSwGY" />
+			<item imgUrl="http://gtms01.alicdn.com/tps/i1/TB1HCSNGFXXXXbgapXXQO4D5VXX-440-180.jpg" clickUrl="http://dwz.cn/wSwH1" />
+			<item imgUrl="http://gtms01.alicdn.com/tps/i1/TB1.O5WGFXXXXbWapXXQO4D5VXX-440-180.jpg" clickUrl="http://dwz.cn/wSwHi" />
 			<item imgUrl="http://img04.taobaocdn.com/imgextra/i4/1114511827/TB2e_KZaVXXXXcOXXXXXXXXXXXX_!!1114511827.jpg" clickUrl="http://dwz.cn/vz9Jt" />
 			<item imgUrl="http://gtms04.alicdn.com/tps/i4/TB1LVLxGFXXXXb6XVXXQO4D5VXX-440-180.jpg" clickUrl="http://dwz.cn/vz9JF" />
 			<item imgUrl="http://gtms03.alicdn.com/tps/i3/TB1YRPNGFXXXXa9XpXXQO4D5VXX-440-180.jpg" clickUrl="http://dwz.cn/vz9J5" />
 		</screen>
 		<statusbar>
-			<item text="双11主会场" clickUrl="http://dwz.cn/vz9IV" />
-			<item text="双11天猫男装会场" clickUrl="http://dwz.cn/vz7CW" />
-			<item text="双11数码家电网购狂欢节绝世优惠仅此一天" clickUrl="http://dwz.cn/vz9J5" />
+			<item text="双12主会场" clickUrl="http://dwz.cn/wSwGI" />
+			<item text="双12天猫男装会场" clickUrl="http://dwz.cn/wSwGH" />
+			<item text="双12数码家电网购狂欢节绝世优惠仅此一天" clickUrl="http://dwz.cn/wSwH1" />
 		</statusbar>
 	</ads>
 </config>
